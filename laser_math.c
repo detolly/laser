@@ -2,17 +2,12 @@
 
 #include <laser_math.h>
 
-static float pitch(point_t p)
-{
-    return atanf(p.y / DISTANCE_TO_WALL);
-}
+static float pitch(const point_t* p) { return atanf(p->y / DISTANCE_TO_WALL); }
+static float yaw  (const point_t* p) { return atan2f(DISTANCE_TO_WALL, p->x); }
 
-static float yaw(point_t p)
-{
-    return atan2f(DISTANCE_TO_WALL, p.x);
-}
-
-angles_t angles_between_projected_vectors(point_t previous, point_t next)
+void angles_between_projected_points(angles_t* angles,
+                                     const point_t* previous,
+                                     const point_t* next)
 {
     const float previous_yaw = yaw(previous);
     const float next_yaw = yaw(next);
@@ -20,26 +15,21 @@ angles_t angles_between_projected_vectors(point_t previous, point_t next)
     const float previous_pitch = pitch(previous);
     const float next_pitch = pitch(next);
 
-    const float d_yaw = next_yaw - previous_yaw;
+    const float d_yaw = previous_yaw - next_yaw;            // higher angles are to the left
     const float d_pitch = next_pitch - previous_pitch;
 
-    const angles_t r = {
-        next.x > previous.x ? d_yaw : d_yaw * -1.f,
-        next.y > previous.y ? d_pitch : d_pitch * -1.f,
-    };
+    angles->yaw.value = fabsf(d_yaw);
+    angles->yaw.direction = (d_yaw > 0 ? DIRECTION_POS : DIRECCTION_NEG);
 
-    return r;
+    angles->pitch.value = fabsf(d_pitch);
+    angles->pitch.direction = (d_pitch > 0 ? DIRECTION_POS : DIRECCTION_NEG);
 }
 
 static float project_x(float x) { return (((x + 1.f) / 2.f) * PICTURE_SIZE) - PICTURE_SIZE / 2; }
-static float project_y(float y) { return (((y + 1.f) / 2.f) * PICTURE_SIZE) - PICTURE_SIZE / 2 + DISTANCE_UP; }
+static float project_y(float y) { return (((y + 1.f) / 2.f) * PICTURE_SIZE) + DISTANCE_UP; }
 
-point_t project(point_t p)
+void project_point(point_t* point, const point_t* point_to_project)
 {
-    point_t ret = {
-        .x = project_x(p.x),
-        .y = project_y(p.y)
-    };
-
-    return ret;
+    point->x = project_x(point_to_project->x);
+    point->y = project_y(point_to_project->y);
 }
