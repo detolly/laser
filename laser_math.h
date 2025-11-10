@@ -7,12 +7,12 @@
 typedef struct {
     float x;
     float y;
-} point;
+} point_t;
 
 typedef struct {
     float yaw;   // x
     float pitch; // y
-} angles;
+} angles_t;
 
-angles angles_between_projected_vectors(point previous, point next);
-point project(point p);
+angles_t angles_between_projected_vectors(point_t previous, point_t next);
+point_t project(point_t p);

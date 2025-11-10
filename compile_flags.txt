@@ -1,2 +1,4 @@
--Weverything
+-Wall
+-Wextra
+-Wconversion
 -I.
