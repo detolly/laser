@@ -1,3 +1,5 @@
+# -Weverything
+-Wno-declaration-after-statement
 -Wall
 -Wextra
 -Wconversion

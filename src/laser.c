@@ -7,11 +7,6 @@
 #define RAD_TO_DEG (180.f / 3.1415926535f)
 #define TWO_PI (2 * 3.1415926535f)
 
-// const static point_t points[] = {
-//     { -1.f, -1.f },
-//     { 1.f, 1.f },
-// };
-
 int main(int argc, const char* argv[])
 {
     (void)argc;
@@ -33,7 +28,7 @@ int main(int argc, const char* argv[])
 
         point_t projected_point;
         project_point(&projected_point, &points[i]);
-        
+
         angles_t angles;
         angles_between_projected_points(&angles, &projected_point_before, &projected_point);
 

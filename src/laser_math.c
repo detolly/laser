@@ -1,9 +1,17 @@
 #include <math.h>
 
 #include <laser_math.h>
+#include <config.h>
 
-static float pitch(const point_t* p) { return atanf(p->y / DISTANCE_TO_WALL); }
-static float yaw  (const point_t* p) { return atan2f(DISTANCE_TO_WALL, p->x); }
+static float pitch(const point_t* p)
+{
+    return atanf(p->y / *distance_to_wall());
+}
+
+static float yaw(const point_t* p)
+{
+    return atan2f(*distance_to_wall(), p->x);
+}
 
 void angles_between_projected_points(angles_t* angles,
                                      const point_t* previous,
@@ -25,8 +33,17 @@ void angles_between_projected_points(angles_t* angles,
     angles->pitch.direction = (d_pitch > 0 ? DIRECTION_POS : DIRECCTION_NEG);
 }
 
-static float project_x(float x) { return (((x + 1.f) / 2.f) * PICTURE_SIZE) - PICTURE_SIZE / 2; }
-static float project_y(float y) { return (((y + 1.f) / 2.f) * PICTURE_SIZE) + DISTANCE_UP; }
+static float project_x(float x)
+{
+    const float pic_size = *picture_size();
+    return (((x + 1.f) / 2.f) * pic_size) - pic_size / 2;
+}
+
+static float project_y(float y)
+{
+    const float pic_size = *picture_size();
+    return (((y + 1.f) / 2.f) * pic_size) + pic_size;
+}
 
 void project_point(point_t* point, const point_t* point_to_project)
 {

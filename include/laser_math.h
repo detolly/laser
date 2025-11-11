@@ -1,9 +1,5 @@
 #pragma once
 
-#define PICTURE_SIZE 1.f // size of picture in meters
-#define DISTANCE_TO_WALL 5.f // distance in z to wall in meters
-#define DISTANCE_UP 5.f // distance in y from origin to bottom of canvas
-
 typedef enum {
     DIRECTION_POS,
     DIRECCTION_NEG
