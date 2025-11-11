@@ -1,0 +1,12 @@
+
+the motor can move at 750 RPM at 1.5 Nm torque.
+
+750 RPM = 12.5 Rev / s.
+
+1 Rev = 2*PI radians.
+
+12.5 Rev / s = 78.53 radians / s.
+
+A picture of a circle requires 0.159836 radians/s yaw, and 0.078451 radians pitch.
+
+which means, we can, at gear ratio 1, produce min(491, 1001) = 491 full pictures at max torque.

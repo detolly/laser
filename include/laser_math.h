@@ -1,9 +1,7 @@
 #pragma once
 
-typedef enum {
-    DIRECTION_POS,
-    DIRECCTION_NEG
-} direction_t;
+#define RAD_TO_DEG (180.f / 3.1415926535f)
+#define TWO_PI (2.f * 3.1415926535f)
 
 typedef struct {
     float x;
@@ -11,18 +9,22 @@ typedef struct {
 } point_t;
 
 typedef struct {
-    float value;
-    direction_t direction;
-} angle_t;
-
-typedef struct {
-    angle_t yaw;   // x
-    angle_t pitch; // y
+    float yaw;   // x
+    float pitch; // y
 } angles_t;
 
-void angles_between_projected_points(angles_t* angles,
-                                     const point_t* previous,
-                                     const point_t* next);
+typedef struct {
+    point_t original_point;
+    point_t projected_point;
+    point_t fixed_point;
+    angles_t fixed_angles;
+} projection_t;
 
-void project_point(point_t* point,
+float pitch(const point_t* p);
+float yaw(const point_t* p);
+
+void project_point(projection_t* point,
                    const point_t* point_to_project);
+
+void calculate_grid_points(void);
+void free_grid_points(void);
