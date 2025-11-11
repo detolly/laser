@@ -32,23 +32,5 @@ int main(int argc, const char* argv[])
         printf("%f,%f,%f,%f,%f,%d,%d\n", p->x, distance_to_wall(), p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
     }
 
-    // float min_yaw = 999.f;
-    // float min_pitch = 999.f;
-    //
-    // for(unsigned i = 0; i < picture.num_points - 1; i++) {
-    //     float yaw = picture.angles[i].yaw.value;
-    //     float pitch = picture.angles[i].pitch.value;
-    //
-    //     printf("yaw: %f deg, pitch: %f deg\n", yaw * RAD_TO_DEG, pitch * RAD_TO_DEG);
-    //
-    //     if (yaw < min_yaw)
-    //         min_yaw = yaw;
-    //     if (pitch < min_pitch)
-    //         min_pitch = pitch;
-    // }
-    //
-    // printf("min yaw: %f min pitch: %f\n", min_yaw, min_pitch);
-    // printf("total: yaw: %f pitch: %f\n", picture.total_yaw, picture.total_pitch);
-
     picture_free(&picture);
 }

@@ -15,9 +15,6 @@ static void make_instruction_pair(motor_instruction_pair_t* instruction_pair, pr
     instruction_pair->yaw.steps = (int)(fabsf(d_yaw) / (TWO_PI / (float)steps_per_revolution_yaw()));
     instruction_pair->yaw.direction = d_yaw < 0.f ? DIRECTION_FORWARD : DIRECTION_BACKWARD;
 
-    printf("%f %f\n", p1->fixed_angles.yaw, p1->fixed_angles.pitch);
-    printf("%f %f\n", p2->fixed_angles.yaw, p2->fixed_angles.pitch);
-
     instruction_pair->pitch.steps = (int)(fabsf(d_pitch) / (TWO_PI / (float)steps_per_revolution_pitch()));
     instruction_pair->pitch.direction = d_yaw < 0.f ? DIRECTION_FORWARD : DIRECTION_BACKWARD;
 }
