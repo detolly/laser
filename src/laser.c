@@ -1,23 +1,24 @@
 #include <math.h>
+#include <stdatomic.h>
 #include <stdio.h>
 
-#include <laser_math.h>
 #include <config.h>
+#include <laser_math.h>
 #include <picture.h>
+
+#define NUM_POINTS 100
+
+static point_t points[NUM_POINTS] = {0};
 
 int main(int argc, const char* argv[])
 {
     (void)argc;
     (void)argv;
 
-    #define NUM_POINTS 100
-
-    point_t points[NUM_POINTS] = {0};
     for(int i = 0; i < NUM_POINTS; i++) {
         points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
         points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
-
-        // printf("%f,%f,%f\n", points[i].x, 0.0f, points[i].y);
+        // printf("%f,%f\n", points[i].x, points[i].y);
     }
 
     calculate_grid_points();
@@ -30,8 +31,10 @@ int main(int argc, const char* argv[])
         point_t* p2 = &picture.projections[i].projected_point;
         angles_t* a = &picture.projections[i].fixed_angles;
         motor_instruction_pair_t* m = &picture.instructions[i];
+
         printf("%f,%f,%f,%f,%f,%d,%d", p->x, distance_to_wall(), p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
-        printf(",%f,%f,%f\n", p2->x, 0.0f, p2->y);
+        printf(",%f,%f,%f", p2->x, 0.0f, p2->y);
+        puts("");
     }
 
     picture_free(&picture);

@@ -1,6 +1,8 @@
 # -Weverything
+-std=c23
 -Wno-declaration-after-statement
 -Wall
 -Wextra
 -Wconversion
 -Iinclude
+-DLASER_DEBUG=1

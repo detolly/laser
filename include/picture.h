@@ -4,21 +4,6 @@
 
 #include <laser_math.h>
 
-typedef enum {
-    DIRECTION_FORWARD,
-    DIRECTION_BACKWARD,
-} direction_t;
-
-typedef struct {
-    int steps;
-    direction_t direction;
-} motor_instruction_t;
-
-typedef struct {
-    motor_instruction_t yaw;
-    motor_instruction_t pitch;
-} motor_instruction_pair_t;
-
 typedef struct {
     point_t* points;
     projection_t* projections;

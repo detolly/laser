@@ -1,6 +1,6 @@
 CC      := gcc
-CFLAGS  := -Wall -Wextra -std=c23 -Iinclude -g
-LDFLAGS := -lm
+CFLAGS  := -Wall -Wextra -std=c23 -Iinclude -O3 -march=native -DLASER_DEBUG=1
+LDFLAGS := -lm -flto 
 SRC     := $(wildcard src/*.c)
 OBJ     := $(SRC:.c=.o)
 TARGET  := bin/laser
