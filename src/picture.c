@@ -40,9 +40,6 @@ static void picture_calculate(picture_t* picture)
 
 void picture_free(picture_t* picture)
 {
-    if (!picture->initialized)
-        return;
-
     if (picture->points) {
         free(picture->points);
         picture->points = NULL;
@@ -69,6 +66,4 @@ void picture_from_points(picture_t* picture, const point_t* points, size_t num_p
 
     memcpy(picture->points, points, sizeof(point_t) * num_points);
     picture_calculate(picture);
-
-    picture->initialized = 1;
 }
