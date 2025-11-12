@@ -152,12 +152,15 @@ void calculate_grid_points(void)
         const float yaw = angle_step_yaw * (float)x;
         const float projected_x = project_angle_yaw(yaw);
         if (projected_x > (picture_size() / 2))
-            continue;
+            break;
 
         for(int y = 0; y < (steps_pitch / (360 / 90)); y++) {
             const float pitch = angle_step_pitch * (float)y;
             const float projected_y = project_angle_pitch(pitch);
-            if (projected_y > (distance_up() + picture_size()) || projected_y < distance_up())
+
+            if (projected_y > (distance_up() + picture_size()))
+                break;
+            if (projected_y < distance_up())
                 continue;
 
             grid_member_t p = {
