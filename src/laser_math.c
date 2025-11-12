@@ -151,7 +151,7 @@ void calculate_grid_points(void)
     for(int x = 0; x < (steps_yaw / (360 / 90)); x++) {
         const float yaw = angle_step_yaw * (float)x;
         const float projected_x = project_angle_yaw(yaw);
-        if (projected_x > (picture_size() / 2) || projected_x < -(picture_size() / 2))
+        if (projected_x > (picture_size() / 2))
             continue;
 
         for(int y = 0; y < (steps_pitch / (360 / 90)); y++) {
@@ -171,6 +171,8 @@ void calculate_grid_points(void)
                 }
             };
             push(p);
+
+            // since observer is at x=0 it will be symmetric.
             p.point.x = -projected_x;
             p.angles.yaw = -yaw;
             push(p);
