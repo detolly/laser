@@ -29,21 +29,17 @@ typedef struct {
 } motor_instruction_pair_t;
 
 typedef struct {
-    point_t original_point;
     point_t projected_point;
     point_t fixed_point;
     angles_t fixed_angles;
 } projection_t;
 
-float pitch(const point_t* p);
-float yaw(const point_t* p);
-
 void project_point(projection_t* point,
                    const point_t* point_to_project);
 
 void make_instruction_pair(motor_instruction_pair_t* instruction_pair,
-                           projection_t* p1,
-                           projection_t* p2);
+                           const projection_t* p1,
+                           const projection_t* p2);
 
 void calculate_grid_points(void);
 void free_grid_points(void);

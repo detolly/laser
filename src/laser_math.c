@@ -1,4 +1,6 @@
+#ifdef LASER_DEBUG
 #define _POSIX_C_SOURCE 200809L
+#endif
 
 #include <assert.h>
 #include <math.h>
@@ -6,7 +8,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef LASER_DEBUG
 #include <time.h>
+#endif
 
 #include <laser_math.h>
 #include <config.h>
@@ -31,12 +36,14 @@ static float project_y(float y)
     return (((y + 1.f) / 2.f) * pic_size) + pic_size;
 }
 
+#ifdef LASER_DEBUG
 static uint64_t ns_now(void)
 {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return (uint64_t)ts.tv_sec * 1000000000ULL + (unsigned long long)ts.tv_nsec;
 }
+#endif
 
 void project_point(projection_t* proj, const point_t* point_to_project)
 {
@@ -72,7 +79,7 @@ void project_point(projection_t* proj, const point_t* point_to_project)
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
-    printf("searching calculated_grid_points took %f us.\n", us);
+    fprintf(stderr, "searching calculated_grid_points took %f us.\n", us);
 #endif
 
     assert(least_distance_index != calculated_grid_points_length + 1);
@@ -157,7 +164,7 @@ void calculate_grid_points(void)
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
-    printf("calculating grid took %f us.\n", us);
+    fprintf(stderr, "calculating grid took %f us.\n", us);
 #endif
 }
 
@@ -167,7 +174,9 @@ void free_grid_points(void)
     calculated_grid_points = NULL;
 }
 
-void make_instruction_pair(motor_instruction_pair_t* instruction_pair, projection_t* p1, projection_t* p2)
+void make_instruction_pair(motor_instruction_pair_t* instruction_pair,
+                           const projection_t* p1,
+                           const projection_t* p2)
 {
     const float d_yaw = p1->fixed_angles.yaw - p2->fixed_angles.yaw;
     const float d_pitch = p1->fixed_angles.pitch - p2->fixed_angles.pitch;
@@ -176,7 +185,7 @@ void make_instruction_pair(motor_instruction_pair_t* instruction_pair, projectio
     const float steps_pitch = fabsf(d_pitch) / (TWO_PI / (float)steps_per_revolution_pitch());
 
 #ifdef LASER_DEBUG
-    printf("steps: %f %f %d %d\n", steps_yaw, steps_pitch, (int)roundf(steps_yaw), (int)roundf(steps_pitch));
+    fprintf(stderr, "steps: %f %f %d %d\n", steps_yaw, steps_pitch, (int)roundf(steps_yaw), (int)roundf(steps_pitch));
 #endif
 
     instruction_pair->yaw.steps = (int)roundf(steps_yaw);

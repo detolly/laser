@@ -62,7 +62,7 @@ void picture_from_file(picture_t* picture, const char* filename)
     //...
 }
 
-void picture_from_points(picture_t* picture, point_t* points, size_t num_points)
+void picture_from_points(picture_t* picture, const point_t* points, size_t num_points)
 {
     picture->points = (point_t*)malloc(sizeof(point_t)*num_points);
     picture->num_points = num_points;

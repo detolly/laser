@@ -16,4 +16,4 @@ typedef struct {
 
 void picture_free(picture_t* picture);
 void picture_from_file(picture_t* picture, const char* filename);
-void picture_from_points(picture_t* picture, point_t* points, size_t num_points);
+void picture_from_points(picture_t* picture, const point_t* points, size_t num_points);
