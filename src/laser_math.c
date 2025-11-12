@@ -148,20 +148,20 @@ void calculate_grid_points(void)
     const float angle_step_yaw = TWO_PI / (float)steps_yaw;
     const float angle_step_pitch = TWO_PI / (float)steps_pitch;
 
-    for(int x = 0; x < (steps_yaw / (360 / 90)); x++) {
+    const float wanted_y_start_angle = atanf(distance_up() / distance_to_wall());
+    const int start_y = (int)(wanted_y_start_angle / angle_step_yaw) + 1;
+
+    for(int x = 0;; x++) {
         const float yaw = angle_step_yaw * (float)x;
         const float projected_x = project_angle_yaw(yaw);
         if (projected_x > (picture_size() / 2))
             break;
 
-        for(int y = 0; y < (steps_pitch / (360 / 90)); y++) {
+        for(int y = start_y;; y++) {
             const float pitch = angle_step_pitch * (float)y;
             const float projected_y = project_angle_pitch(pitch);
-
             if (projected_y > (distance_up() + picture_size()))
                 break;
-            if (projected_y < distance_up())
-                continue;
 
             grid_member_t p = {
                 .point = {
