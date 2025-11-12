@@ -50,9 +50,6 @@ void project_point(projection_t* proj, const point_t* point_to_project)
     const float projected_x = project_x(point_to_project->x);
     const float projected_y = project_y(point_to_project->y);
 
-    proj->original_point.x = point_to_project->x;
-    proj->original_point.y = point_to_project->y;
-
     proj->projected_point.x = projected_x;
     proj->projected_point.y = projected_y;
 
