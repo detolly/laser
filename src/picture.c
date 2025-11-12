@@ -26,26 +26,24 @@ static void picture_calculate(picture_t* picture)
         if (i == 0)
             continue;
 
-        motor_instruction_pair_t ip = {0};
-        make_instruction_pair(&ip, &picture->projections[i], &picture->projections[i - 1]);
-        picture->instructions[i - 1] = ip;
+        motor_instruction_pair_t* ip = &picture->instructions[i - 1];
+        make_instruction_pair(ip, &picture->projections[i], &picture->projections[i - 1]);
 
-        picture->total_yaw += ip.yaw.steps;
-        picture->total_pitch += ip.pitch.steps;
+        picture->total_yaw += ip->yaw.steps;
+        picture->total_pitch += ip->pitch.steps;
 
-        steps_yaw += ip.yaw.steps * (ip.yaw.direction == DIRECTION_FORWARD ? 1 : -1);
-        steps_pitch += ip.pitch.steps * (ip.pitch.direction == DIRECTION_FORWARD ? 1 : -1);
+        steps_yaw += ip->yaw.steps * (ip->yaw.direction == DIRECTION_FORWARD ? 1 : -1);
+        steps_pitch += ip->pitch.steps * (ip->pitch.direction == DIRECTION_FORWARD ? 1 : -1);
     }
 
-    motor_instruction_pair_t ip = {0};
-    make_instruction_pair(&ip, &picture->projections[picture->num_points - 1], &picture->projections[0]);
-    picture->instructions[picture->num_points - 1] = ip;
+    motor_instruction_pair_t* ip = &picture->instructions[picture->num_points - 1];
+    make_instruction_pair(ip, &picture->projections[picture->num_points - 1], &picture->projections[0]);
 
-    picture->total_yaw += ip.yaw.steps;
-    picture->total_pitch += ip.pitch.steps;
+    picture->total_yaw += ip->yaw.steps;
+    picture->total_pitch += ip->pitch.steps;
 
-    steps_yaw += ip.yaw.steps * (ip.yaw.direction == DIRECTION_FORWARD ? 1 : -1);
-    steps_pitch += ip.pitch.steps * (ip.pitch.direction == DIRECTION_FORWARD ? 1 : -1);
+    steps_yaw += ip->yaw.steps * (ip->yaw.direction == DIRECTION_FORWARD ? 1 : -1);
+    steps_pitch += ip->pitch.steps * (ip->pitch.direction == DIRECTION_FORWARD ? 1 : -1);
 
     fprintf(stderr, "symmetrical steps: %d %d\n", steps_yaw, steps_pitch);
 

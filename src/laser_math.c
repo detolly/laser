@@ -56,26 +56,23 @@ static uint64_t ns_now(void)
 }
 #endif
 
-void project_point(projection_t* proj, const point_t* point_to_project)
+static grid_member_t* find_grid_point_closest_to_grid_point(const point_t* projected_point)
 {
-    const float projected_x = project_x(point_to_project->x);
-    const float projected_y = project_y(point_to_project->y);
-
-    proj->projected_point.x = projected_x;
-    proj->projected_point.y = projected_y;
-
-    float least_distance = INFINITY;
-    size_t least_distance_index = grid_points_length + 1;
-
     assert(g_grid_points);
 
 #ifdef LASER_DEBUG
     const uint64_t ns_before = ns_now();
 #endif
 
+    const float x = projected_point->x;
+    const float y = projected_point->y;
+
+    float least_distance = INFINITY;
+    size_t least_distance_index = grid_points_length + 1;
+
     for(size_t i = 0; i < grid_points_length; i++) {
-        const float dx = projected_x - g_grid_points[i].point.x;
-        const float dy = projected_y - g_grid_points[i].point.y;
+        const float dx = x - g_grid_points[i].point.x;
+        const float dy = y - g_grid_points[i].point.y;
         const float distance = dx*dx + dy*dy;
         if (distance < least_distance) {
 #ifdef LASER_DEBUG
@@ -89,12 +86,6 @@ void project_point(projection_t* proj, const point_t* point_to_project)
     assert(least_distance_index != grid_points_length + 1);
     grid_member_t* grid_point = &g_grid_points[least_distance_index];
 
-    proj->fixed_point.x = grid_point->point.x;
-    proj->fixed_point.y = grid_point->point.y;
-
-    proj->fixed_angles.yaw = grid_point->angles.yaw;
-    proj->fixed_angles.pitch = grid_point->angles.pitch;
-
 #ifdef LASER_DEBUG
     uint64_t ns_after = ns_now();
 
@@ -103,9 +94,28 @@ void project_point(projection_t* proj, const point_t* point_to_project)
     // fprintf(stderr, "grid index: %lu\n", least_distance_index);
     // fprintf(stderr, "grid x: %f y: %f\n", grid_point->point.x, grid_point->point.y);
 #endif
+
+    return grid_point;
 }
 
-static float project_angle_yaw(float yaw) { return distance_to_wall() / tanf(yaw); }
+void project_point(projection_t* proj, const point_t* point_to_project)
+{
+    const float projected_x = project_x(point_to_project->x);
+    const float projected_y = project_y(point_to_project->y);
+
+    proj->projected_point.x = projected_x;
+    proj->projected_point.y = projected_y;
+
+    grid_member_t* grid_point = find_grid_point_closest_to_grid_point(&proj->projected_point);
+
+    proj->fixed_point.x = grid_point->point.x;
+    proj->fixed_point.y = grid_point->point.y;
+
+    proj->fixed_angles.yaw = grid_point->angles.yaw;
+    proj->fixed_angles.pitch = grid_point->angles.pitch;
+}
+
+static float project_angle_yaw(float yaw) { return tanf(yaw) * distance_to_wall(); }
 static float project_angle_pitch(float pitch) { return tanf(pitch) * distance_to_wall(); }
 
 void calculate_grid_points(void)
@@ -135,30 +145,21 @@ void calculate_grid_points(void)
         g_grid_points[i++] = p;                                                         \
     } while(0)
 
-#define FOV_X 90
-#define FOV_Y 90
-
-    assert(steps_pitch % (360 / FOV_X) == 0);
-    assert(steps_yaw % (360 / FOV_Y) == 0);
-
     const float angle_step_yaw = TWO_PI / (float)steps_yaw;
     const float angle_step_pitch = TWO_PI / (float)steps_pitch;
 
-    for(int x = 0; x < (steps_yaw / (360 / FOV_X)); x++) {
+    for(int x = 0; x < (steps_yaw / (360 / 90)); x++) {
         const float yaw = angle_step_yaw * (float)x;
         const float projected_x = project_angle_yaw(yaw);
         if (projected_x > (picture_size() / 2) || projected_x < -(picture_size() / 2))
             continue;
 
-        for(int y = 0; y < (steps_pitch / (360 / FOV_Y)); y++) {
+        for(int y = 0; y < (steps_pitch / (360 / 90)); y++) {
             const float pitch = angle_step_pitch * (float)y;
             const float projected_y = project_angle_pitch(pitch);
             if (projected_y > (distance_up() + picture_size()) || projected_y < distance_up())
                 continue;
 
-// #ifdef LASER_DEBUG
-//             fprintf(stderr, "Adding to grid: %f %f\n", projected_x, projected_y);
-// #endif
             grid_member_t p = {
                 .point = {
                     .x = projected_x,
@@ -184,12 +185,6 @@ void calculate_grid_points(void)
 
     float us = (float)(ns_after - ns_before) / 1000.f;
     fprintf(stderr, "calculating grid took %f us.\n", us);
-
-#if 0
-    for(unsigned i = 0; i < grid_points_length; i++) {
-        fprintf(stderr, "grid: %f %f\n", g_grid_points[i].point.x, g_grid_points[i].point.y);
-    }
-#endif
 #endif
 }
 
@@ -210,9 +205,8 @@ void make_instruction_pair(motor_instruction_pair_t* instruction_pair,
     const float steps_pitch = fabsf(d_pitch) * (float)steps_per_revolution_pitch() / TWO_PI;
 
 #ifdef LASER_DEBUG
-#if 0
-    fprintf(stderr, "steps: %f %f %d %d\n", steps_yaw, steps_pitch, (int)roundf(steps_yaw), (int)roundf(steps_pitch));
-#endif
+    // fprintf(stderr, "steps angles: %f %f %f %f\n", p2->fixed_angles.yaw, p2->fixed_angles.pitch, p1->fixed_angles.yaw, p1->fixed_angles.pitch);
+    // fprintf(stderr, "steps: %f %f  %d %d\n", steps_yaw, steps_pitch, (int)roundf(steps_yaw), (int)roundf(steps_pitch));
 #endif
 
     instruction_pair->yaw.steps = (int)roundf(steps_yaw);
