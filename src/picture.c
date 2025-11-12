@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,25 +18,39 @@ static void picture_calculate(picture_t* picture)
     picture->total_pitch = 0.0f;
     picture->total_yaw = 0.0f;
 
+    int steps_yaw = 0;
+    int steps_pitch = 0;
+
     for(unsigned i = 0; i < picture->num_points; i++) {
         project_point(&picture->projections[i], &picture->points[i]);
         if (i == 0)
             continue;
 
-        motor_instruction_pair_t instruction_pair = {0};
-        make_instruction_pair(&instruction_pair, &picture->projections[i], &picture->projections[i - 1]);
-        picture->instructions[i - 1] = instruction_pair;
+        motor_instruction_pair_t ip = {0};
+        make_instruction_pair(&ip, &picture->projections[i], &picture->projections[i - 1]);
+        picture->instructions[i - 1] = ip;
 
-        picture->total_yaw += instruction_pair.yaw.steps;
-        picture->total_pitch += instruction_pair.pitch.steps;
+        picture->total_yaw += ip.yaw.steps;
+        picture->total_pitch += ip.pitch.steps;
+
+        steps_yaw += ip.yaw.steps * (ip.yaw.direction == DIRECTION_FORWARD ? 1 : -1);
+        steps_pitch += ip.pitch.steps * (ip.pitch.direction == DIRECTION_FORWARD ? 1 : -1);
     }
 
-    motor_instruction_pair_t instruction_pair = {0};
-    make_instruction_pair(&instruction_pair, &picture->projections[picture->num_points - 1], &picture->projections[0]);
-    picture->instructions[picture->num_points - 1] = instruction_pair;
+    motor_instruction_pair_t ip = {0};
+    make_instruction_pair(&ip, &picture->projections[picture->num_points - 1], &picture->projections[0]);
+    picture->instructions[picture->num_points - 1] = ip;
 
-    picture->total_yaw += instruction_pair.yaw.steps;
-    picture->total_pitch += instruction_pair.pitch.steps;
+    picture->total_yaw += ip.yaw.steps;
+    picture->total_pitch += ip.pitch.steps;
+
+    steps_yaw += ip.yaw.steps * (ip.yaw.direction == DIRECTION_FORWARD ? 1 : -1);
+    steps_pitch += ip.pitch.steps * (ip.pitch.direction == DIRECTION_FORWARD ? 1 : -1);
+
+    fprintf(stderr, "symmetrical steps: %d %d\n", steps_yaw, steps_pitch);
+
+    assert(steps_yaw == 0);
+    assert(steps_pitch == 0);
 }
 
 void picture_free(picture_t* picture)
