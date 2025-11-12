@@ -28,6 +28,8 @@ int main(int argc, const char* argv[])
     picture_t picture = {0};
     picture_from_points(&picture, points, NUM_POINTS);
 
+    fprintf(stderr, "total rotations: %f %f\n", picture.total_yaw_angle / TWO_PI, picture.total_pitch_angle / TWO_PI);
+
     for(unsigned i = 0; i < picture.num_points; i++) {
         point_t* p = &picture.projections[i].fixed_point;
         point_t* p2 = &picture.projections[i].projected_point;

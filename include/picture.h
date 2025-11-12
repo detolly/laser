@@ -11,6 +11,8 @@ typedef struct {
     size_t num_points;
     int total_yaw;
     int total_pitch;
+    float total_yaw_angle;
+    float total_pitch_angle;
 } picture_t;
 
 void picture_free(picture_t* picture);

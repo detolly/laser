@@ -8,7 +8,7 @@ int g_steps_per_revolution_pitch = 15000;
 char g_must_recalculate_pictures = 1;
 
 float g_picture_size = 0.5f;
-float g_distance_to_wall = 10.f;
+float g_distance_to_wall = 6.f;
 float g_distance_up = 1.f;
 float g_motor_speed = 750.f;
 
