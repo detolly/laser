@@ -1,3 +1,5 @@
+#include <laser_math.h>
+
 #ifdef LASER_DEBUG
 #define _POSIX_C_SOURCE 200809L
 #endif
@@ -13,7 +15,6 @@
 #include <time.h>
 #endif
 
-#include <laser_math.h>
 #include <config.h>
 
 typedef struct {

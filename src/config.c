@@ -1,5 +1,5 @@
-
 #include <config.h>
+
 #include <laser_math.h>
 
 int g_steps_per_revolution_yaw = 15000;

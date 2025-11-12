@@ -1,3 +1,5 @@
+#include <picture.h>
+
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
@@ -6,7 +8,6 @@
 
 #include <config.h>
 #include <laser_math.h>
-#include <picture.h>
 
 static void picture_calculate(picture_t* picture)
 {
