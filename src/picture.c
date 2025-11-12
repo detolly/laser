@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,11 +24,15 @@ static void picture_calculate(picture_t* picture)
 
     for(unsigned i = 0; i < picture->num_points; i++) {
         project_point(&picture->projections[i], &picture->points[i]);
+
         if (i == 0)
             continue;
 
         motor_instruction_pair_t* ip = &picture->instructions[i - 1];
         make_instruction_pair(ip, &picture->projections[i], &picture->projections[i - 1]);
+
+        picture->total_yaw_angle += fabsf(picture->projections[i].fixed_angles.yaw - picture->projections[i - 1].fixed_angles.yaw);
+        picture->total_pitch_angle += fabsf(picture->projections[i].fixed_angles.pitch - picture->projections[i - 1].fixed_angles.pitch);
 
         picture->total_yaw += ip->yaw.steps;
         picture->total_pitch += ip->pitch.steps;
@@ -41,6 +46,9 @@ static void picture_calculate(picture_t* picture)
 
     picture->total_yaw += ip->yaw.steps;
     picture->total_pitch += ip->pitch.steps;
+
+    picture->total_yaw_angle += fabsf(picture->projections[picture->num_points - 1].fixed_angles.yaw - picture->projections[0].fixed_angles.yaw);
+    picture->total_pitch_angle += fabsf(picture->projections[picture->num_points - 1].fixed_angles.pitch - picture->projections[0].fixed_angles.pitch);
 
     steps_yaw += ip->yaw.steps * (ip->yaw.direction == DIRECTION_FORWARD ? 1 : -1);
     steps_pitch += ip->pitch.steps * (ip->pitch.direction == DIRECTION_FORWARD ? 1 : -1);
