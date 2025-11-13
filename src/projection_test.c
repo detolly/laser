@@ -1,8 +1,6 @@
 #include <math.h>
 #include <stdio.h>
 
-// #include <gen/points.h>
-
 #include <config.h>
 #include <laser_math.h>
 #include <picture.h>
@@ -10,6 +8,7 @@
 #define NUM_POINTS 100
 static point_t points[NUM_POINTS] = {0};
 
+// #include <gen/points.h>
 // #define NUM_POINTS sizeof(points) / sizeof(point_t)
 
 int main(int argc, const char* argv[])
