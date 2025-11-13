@@ -164,27 +164,49 @@ void calculate_grid_points(void)
     grid_points = (grid_member_t*)malloc(sizeof(grid_member_t) * num_grid_items);
     assert(grid_points);
 
+    float yaws[grid_length_x / 2];
+    float pitches[grid_length_y];
+
+    float projected_xs[grid_length_x / 2];
+    float projected_ys[grid_length_y];
+
     for(size_t x = 0; x < stop_x; x++) {
         const float yaw = angle_step_yaw * (float)x;
-        const float projected_x = project_angle_yaw(yaw);
+        projected_xs[x] = project_angle_yaw(yaw);
+        yaws[x] = yaw;
+    }
 
+    for(size_t y = 0; y < grid_length_y; y++) {
+        const float pitch = angle_step_pitch * (float)y;
+        projected_ys[y] = project_angle_pitch(pitch);
+        pitches[y] = pitch;
+    }
+
+    for(size_t x = 0; x < stop_x; x++) {
         for(size_t y = 0; y < stop_y - start_y; y++) {
-            const float pitch = angle_step_pitch * (float)(y + start_y);
-            const float projected_y = project_angle_pitch(pitch);
-
-            grid_member_t p = {
-                .point = { .x = projected_x, .y = projected_y },
-                .angles = { .yaw = yaw, .pitch = pitch },
-            };
-
             // offset half-way into the array to make space for the symmetric negative x values.
-            grid_points[(stop_x * grid_length_y) + x * grid_length_y + y] = p;
+            const size_t grid_member_index = (stop_x * grid_length_y) + x * grid_length_y + y;
+            grid_member_t* grid_member = &grid_points[grid_member_index];
 
-            p.point.x = -projected_x;
-            p.angles.yaw = -yaw;
+            grid_member->point.x = projected_xs[x];
+            grid_member->point.y = projected_ys[y];
+            grid_member->angles.yaw = yaws[x];
+            grid_member->angles.pitch = pitches[y];
+        }
+    }
 
+    for(size_t x = 0; x < stop_x; x++) {
+        for(size_t y = 0; y < stop_y - start_y; y++) {
             // go backwards from half-way.
-            grid_points[(stop_x * grid_length_y) - (x + 1) * grid_length_y + y] = p;
+            const size_t grid_member_to_copy_index = (stop_x * grid_length_y) + x * grid_length_y + y;
+            const size_t grid_member_index = (stop_x * grid_length_y) - (x + 1) * grid_length_y + y;
+
+            const grid_member_t* grid_member_to_copy = &grid_points[grid_member_to_copy_index];
+            grid_member_t* grid_member = &grid_points[grid_member_index];
+
+            *grid_member = *grid_member_to_copy;
+            grid_member->point.x = -grid_member->point.x;
+            grid_member->angles.yaw = -grid_member->angles.yaw;
         }
     }
 
