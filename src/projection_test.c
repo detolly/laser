@@ -31,12 +31,12 @@ int main(int argc, const char* argv[])
     fprintf(stderr, "total rotations: %f %f\n", picture.total_yaw_angle / TWO_PI, picture.total_pitch_angle / TWO_PI);
 
     for(unsigned i = 0; i < picture.num_points; i++) {
-        point_t* p = &picture.projections[i].fixed_point;
+        point_t* p = &picture.projections[i].grid_point;
         point_t* p2 = &picture.projections[i].projected_point;
-        angles_t* a = &picture.projections[i].fixed_angles;
+        angles_t* a = &picture.projections[i].grid_angles;
         motor_instruction_pair_t* m = &picture.instructions[i];
 
-        printf("%f,%f,%f,%f,%f,%d,%d", p->x, distance_to_wall(), p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
+        printf("%f,%f,%f,%f,%lu,%lu", p->x, p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
         printf(",%f,%f,%f", p2->x, 0.0f, p2->y);
         puts("");
     }
