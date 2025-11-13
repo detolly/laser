@@ -143,8 +143,15 @@ void project_point(projection_t* proj, const point_t* point_to_project)
     proj->indices.y = y->index;
 }
 
-static float project_angle_yaw(const float yaw) { return tanf(yaw) * distance_to_wall(); }
-static float project_angle_pitch(const float pitch) { return tanf(pitch) * distance_to_wall(); }
+static float project_angle_yaw(const float yaw, const float distance_to_wall)
+{
+    return tanf(yaw) * distance_to_wall;
+}
+
+static float project_angle_pitch(const float pitch, const float distance_to_wall)
+{
+    return tanf(pitch) * distance_to_wall;
+}
 
 void calculate_grid_points(void)
 {
@@ -157,9 +164,13 @@ void calculate_grid_points(void)
     const float angle_step_yaw = TWO_PI / (float)steps_yaw;
     const float angle_step_pitch = TWO_PI / (float)steps_pitch;
 
-    const float wanted_y_start_angle = atanf(distance_up() / distance_to_wall());
-    const float wanted_y_stop_angle = atanf((picture_size() + distance_up()) / distance_to_wall());
-    const float wanted_x_stop_angle = atanf((picture_size() / 2) / distance_to_wall());
+    const float dist_up = distance_up();
+    const float dist_to_wall = distance_to_wall();
+    const float pic_size = picture_size();
+
+    const float wanted_y_start_angle = atanf(dist_up / dist_to_wall);
+    const float wanted_y_stop_angle = atanf((pic_size + dist_up) / dist_to_wall);
+    const float wanted_x_stop_angle = atanf((pic_size / 2) / dist_to_wall);
 
     const size_t start_y = (size_t)(wanted_y_start_angle / angle_step_pitch) + 1;
     const size_t stop_y = (size_t)(wanted_y_stop_angle / angle_step_pitch) + 1;
@@ -180,7 +191,7 @@ void calculate_grid_points(void)
 
     for(size_t x = 0; x < stop_x; x++) {
         const float yaw = angle_step_yaw * (float)x;
-        const float projected_x = project_angle_yaw(yaw);
+        const float projected_x = project_angle_yaw(yaw, dist_to_wall);
 
         const size_t positive_index = x + grid_length_x / 2;
         grid_members_x[positive_index].coord = projected_x;
@@ -195,7 +206,7 @@ void calculate_grid_points(void)
 
     for(size_t y = 0; y < grid_length_y; y++) {
         const float pitch = angle_step_pitch * (float)(y + start_y);
-        grid_members_y[y].coord = project_angle_pitch(pitch);
+        grid_members_y[y].coord = project_angle_pitch(pitch, dist_to_wall);
         grid_members_y[y].angle = pitch;
         grid_members_x[y].index = y;
     }
@@ -219,9 +230,7 @@ void calculate_grid_points(void)
         assert(member->coord >= member_before->coord);
         assert(member->angle >= member_before->angle);
     }
-#endif
 
-#ifdef LASER_DEBUG
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
