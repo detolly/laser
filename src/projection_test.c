@@ -5,22 +5,22 @@
 #include <laser_math.h>
 #include <picture.h>
 
-#define NUM_POINTS 100
-static point_t points[NUM_POINTS] = {0};
+// #define NUM_POINTS 100
+// static point_t points[NUM_POINTS] = {0};
 
-// #include <gen/points.h>
-// #define NUM_POINTS sizeof(points) / sizeof(point_t)
+#include <gen/points.h>
+#define NUM_POINTS sizeof(points) / sizeof(point_t)
 
 int main(int argc, const char* argv[])
 {
     (void)argc;
     (void)argv;
 
-    for(int i = 0; i < NUM_POINTS; i++) {
-        points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
-        points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
-        // printf("%f,%f\n", points[i].x, points[i].y);
-    }
+    // for(int i = 0; i < NUM_POINTS; i++) {
+    //     points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
+    //     points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
+    //     // printf("%f,%f\n", points[i].x, points[i].y);
+    // }
 
     calculate_grid_points();
 

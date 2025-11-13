@@ -5,7 +5,7 @@
 int g_steps_per_revolution_yaw = 15000;
 int g_steps_per_revolution_pitch = 15000;
 
-char g_must_recalculate_pictures = 1;
+bool g_must_recalculate_pictures = 1;
 
 float g_picture_size = 2.f;
 float g_distance_to_wall = 5.f;
@@ -15,13 +15,13 @@ float g_motor_speed = 750.f;
 int steps_per_revolution_yaw(void) { return g_steps_per_revolution_yaw; }
 int steps_per_revolution_pitch(void) { return g_steps_per_revolution_pitch; }
 
-char must_recalculate_pictures(void) { return g_must_recalculate_pictures; }
+bool must_recalculate_pictures(void) { return g_must_recalculate_pictures; }
 float picture_size(void) { return g_picture_size; }
 float distance_to_wall(void) { return g_distance_to_wall; }
 float distance_up(void) { return g_distance_up; }
 float motor_speed(void) { return g_motor_speed; }
 
-void set_must_recalculate_pictures(char new)
+void set_must_recalculate_pictures(bool new)
 {
     g_must_recalculate_pictures = new;
 }

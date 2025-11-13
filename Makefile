@@ -1,16 +1,19 @@
-CC      := gcc
-CFLAGS  := -Wall -Wextra -std=c23 -Iinclude -march=native -DLASER_DEBUG=1 -O3
-LDFLAGS := -lm -flto
-SRC     := $(wildcard src/*.c)
-OBJ     := $(SRC:.c=.o)
+CC       = gcc
+CFLAGS   = -Wall -Wextra -std=c23 -Iinclude -march=native -DLASER_DEBUG=1 -O3
+LDFLAGS  = -lm -flto
 
-all: bin/projection_test
+BINARIES = bin/projection_test bin/motor_test
+SOURCES  = config.c picture.c motor.c laser_math.c
+COMMON   = $(SOURCES:%.c=src/%.o)
+BIN_OBJ  = $(BINARIES:bin/%=src/%.o)
 
-bin/projection_test: $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ) -o $@
+all: $(BINARIES)
 
-%.o: %.c
+$(BINARIES): $(COMMON) $(BIN_OBJ)
+	$(CC) $(LDFLAGS) $(COMMON) $(@:bin/%=src/%.o) -o $@
+
+src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/*.o $(TARGET)
+	rm -f src/*.o $(BINARIES)
