@@ -173,23 +173,18 @@ void calculate_grid_points(void)
             const float projected_y = project_angle_pitch(pitch);
 
             grid_member_t p = {
-                .point = {
-                    .x = projected_x,
-                    .y = projected_y
-                },
-                .angles = {
-                    .yaw = yaw,
-                    .pitch = pitch
-                }
+                .point = { .x = projected_x, .y = projected_y },
+                .angles = { .yaw = yaw, .pitch = pitch },
             };
 
-            grid_points[x * grid_length_y + stop_x * grid_length_y + y] = p;
+            // offset half-way into the array to make space for the symmetric negative x values.
+            grid_points[(stop_x * grid_length_y) + x * grid_length_y + y] = p;
 
-            // since observer is at x=0 it will be symmetric.
             p.point.x = -projected_x;
             p.angles.yaw = -yaw;
 
-            grid_points[(grid_length_x * grid_length_y / 2 - 1) - (x * grid_length_y + y)] = p;
+            // go backwards from half-way.
+            grid_points[(stop_x * grid_length_y) - (x + 1) * grid_length_y + y] = p;
         }
     }
 
