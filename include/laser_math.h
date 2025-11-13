@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #define RAD_TO_DEG (180.f / 3.1415926535f)
 #define TWO_PI (2.f * 3.1415926535f)
 
@@ -19,7 +21,7 @@ typedef enum {
 } direction_t;
 
 typedef struct {
-    int steps;
+    size_t steps;
     direction_t direction;
 } motor_instruction_t;
 
@@ -29,17 +31,19 @@ typedef struct {
 } motor_instruction_pair_t;
 
 typedef struct {
+    size_t x;
+    size_t y;
+} indices_t;
+
+typedef struct {
     point_t projected_point;
-    point_t fixed_point;
-    angles_t fixed_angles;
+    point_t grid_point;
+    angles_t grid_angles;
+    indices_t indices;
 } projection_t;
 
 void project_point(projection_t* point,
                    const point_t* point_to_project);
-
-void make_instruction_pair(motor_instruction_pair_t* instruction_pair,
-                           const projection_t* p1,
-                           const projection_t* p2);
 
 void calculate_grid_points(void);
 void free_grid_points(void);
