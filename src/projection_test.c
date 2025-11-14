@@ -1,14 +1,14 @@
-#include <math.h>
 #include <stdio.h>
 
 #include <config.h>
 #include <laser_math.h>
 #include <picture.h>
 
+// #include <math.h>
 // #define NUM_POINTS 100
 // static point_t points[NUM_POINTS] = {0};
 
-#include <gen/points.h>
+#include <points/game_of_thrones.h>
 #define NUM_POINTS sizeof(points) / sizeof(point_t)
 
 int main(int argc, const char* argv[])
