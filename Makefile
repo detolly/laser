@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -std=c23 -Iinclude -O3 -DLASER_DEBUG
+CFLAGS += -Wall -Wextra -std=c23 -Iinclude -O3 -DLASER_DEBUG
 BINARIES = motor_test projection_test
 SOURCES = src/motor.c src/laser_math.c src/picture.c src/config.c
 
@@ -14,8 +14,8 @@ HOST_BINARIES = $(BINARIES:%=$(HOST_BIN_DIR)/%)
 
 # Device (aarch64)
 DEV_CC = aarch64-linux-gnu-gcc
-DEV_CFLAGS = $(CFLAGS) -mcpu=cortex-a72 -march=armv8-a+fp+simd 
-DEV_LDFLAGS = -lm -flto
+DEV_CFLAGS = $(CFLAGS) -mcpu=cortex-a72 -march=armv8-a+fp+simd  -Ilib/pigpio -DLASER_DEVICE
+DEV_LDFLAGS = -lm -flto -Llib -lpigpio
 DEV_BIN_DIR = target/device
 DEV_OBJ = $(SOURCES:%.c=$(OBJ_DIR)/%_device.o)
 DEV_BINARIES = $(BINARIES:%=$(DEV_BIN_DIR)/%)

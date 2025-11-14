@@ -12,6 +12,10 @@
 #include <config.h>
 #include <laser_math.h>
 
+#ifdef LASER_DEVICE
+#include <pigpio.h>
+#endif
+
 volatile bool should_quit = false;
 volatile bool motor_should_run = false;
 
@@ -59,7 +63,7 @@ const picture_t* current_picture = NULL;
 #define PULSE_YAW() gpioWrite(YAW_PULSE_GPIO, 1); gpioWrite(YAW_PULSE_GPIO, 0)
 
 #define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0);
-#define PULSE_YAW() gpioWrite(PITCH_PULSE_GPIO, 1); gpioWrite(PITCH_PULSE_GPIO, 0)
+#define PULSE_PITCH() gpioWrite(PITCH_PULSE_GPIO, 1); gpioWrite(PITCH_PULSE_GPIO, 0)
 
 #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us);
 
@@ -103,10 +107,12 @@ static void run_program_in_thread()
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
         for(unsigned i = 0; i < max(instr->yaw.steps, instr->pitch.steps); i++) {
-            if (i < instr->yaw.steps)
+            if (i < instr->yaw.steps) {
                 PULSE_YAW();
-            if (i < instr->pitch.steps)
+            }
+            if (i < instr->pitch.steps) {
                 PULSE_PITCH();
+            }
             SLEEP(sleep_time);
         }
     }
