@@ -35,7 +35,7 @@ int main(int argc, const char* argv[])
         angles_t* a = &picture.projections[i].grid_angles;
         motor_instruction_pair_t* m = &picture.instructions[i];
 
-        printf("%f,%f,%f,%f,%lu,%lu", p->x, p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
+        printf("%f,%f,%f,%f,%u,%u", p->x, p->y, a->yaw, a->pitch, m->yaw.steps, m->pitch.steps);
         printf(",%f,%f,%f", p2->x, 0.0f, p2->y);
         puts("");
     }

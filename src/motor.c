@@ -1,10 +1,17 @@
-#include "laser_math.h"
+#define _POSIX_C_SOURCE 200809L
+#define _BSD_SOURCE
+
 #include <motor.h>
 
 #include <assert.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <sched.h>
+
+#include <config.h>
+#include <laser_math.h>
 
 volatile bool should_quit = false;
 volatile bool motor_should_run = false;
@@ -28,27 +35,59 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 const picture_t* current_picture = NULL;
 
-#define DIRECTION_YAW(d)
-#define PULSE_YAW()
+#define DIRECTION_YAW(d) do {} while (0)
+#define PULSE_YAW() do {} while (0)
 
-#define DIRECTION_PITCH(d)
-#define PULSE_PITCH()
+#define DIRECTION_PITCH(d) do {} while (0)
+#define PULSE_PITCH() do {} while (0)
+
+#define SLEEP(us) do {                                              \
+    struct timespec t = { .tv_sec = 0, .tv_nsec = us * 1000 };      \
+    clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
+} while(0)
+
+static size_t max(size_t a, size_t b)
+{
+    return a > b ? a : b;
+}
+
+#define MICROSECONDS_IN_SECONDS 1'000'000
 
 static void run_program_in_thread()
 {
+    typedef long long ll;
+    const config_t* cfg = config();
+
+    const ll rpm = (ll)cfg->motor_speed;
+    const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_yaw);
+    const ll sleep_time = (ll)MICROSECONDS_IN_SECONDS / ((rpm * steps) / 60);
+
+#ifdef LASER_DEBUG
+    fprintf(stderr, "sleep_time: %llu\n", sleep_time);
+#endif
+
     for(size_t i = 0; i < current_picture->num_points; i++) {
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
-        for(unsigned x = 0; x < instr->yaw.steps; x++)
-            PULSE_YAW();
-        for(unsigned x = 0; x < instr->pitch.steps; x++)
-            PULSE_PITCH();
+        for(unsigned i = 0; i < max(instr->yaw.steps, instr->pitch.steps); i++) {
+            if (i < instr->yaw.steps)
+                PULSE_YAW();
+            if (i < instr->pitch.steps)
+                PULSE_PITCH();
+            SLEEP(sleep_time);
+        }
     }
 }
 
+static const struct sched_param prio = {
+    .sched_priority = 99
+};
+
 void* motor_thread(void*)
 {
+    pthread_setschedparam(g_current_motor_thread, SCHED_FIFO, &prio);
+
     while(!should_quit) {
         while(motor_should_run)
             run_program_in_thread();
