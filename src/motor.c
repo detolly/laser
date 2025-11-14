@@ -60,7 +60,7 @@ static void run_program_in_thread()
 
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_yaw);
-    const ll sleep_time = (ll)MICROSECONDS_IN_SECONDS / ((rpm * steps) / 60);
+    const ll sleep_time = (ll)MICROSECONDS_IN_SECONDS / ((rpm * steps) / 60) + 1;
 
 #ifdef LASER_DEBUG
     fprintf(stderr, "sleep_time: %llu\n", sleep_time);
