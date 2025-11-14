@@ -29,25 +29,20 @@ static grid_member_t* grid_members_y = NULL;
 static size_t grid_length_x = 0;
 static size_t grid_length_y = 0;
 
-static float project_x(float x)
+static float project_x(float x, float picture_size)
 {
     assert(x >= -1.f && x <= 1.f);
-    const float pic_size = picture_size();
-
-    const float projected_x = ((x + 1.f) / 2.f) * pic_size - (pic_size / 2);
-    assert(projected_x <= pic_size / 2 && projected_x >= -(pic_size / 2));
+    const float projected_x = ((x + 1.f) / 2.f) * picture_size - (picture_size / 2);
+    assert(projected_x <= picture_size / 2 && projected_x >= -(picture_size / 2));
 
     return projected_x;
 }
 
-static float project_y(float y)
+static float project_y(float y, float picture_size, float distance_up)
 {
     assert(y >= -1.f && y <= 1.f);
-    const float pic_size = picture_size();
-    const float dist_up = distance_up();
-
-    const float projected_y = (((y + 1.f) / 2.f) * pic_size) + dist_up;
-    assert(projected_y >= dist_up && projected_y <= dist_up + pic_size);
+    const float projected_y = (((y + 1.f) / 2.f) * picture_size) + distance_up;
+    assert(projected_y >= distance_up && projected_y <= distance_up + picture_size);
 
     return projected_y;
 }
@@ -122,8 +117,10 @@ static void find_grid_point_closest_to_projected_point(grid_member_t** x,
 
 void project_point(projection_t* proj, const point_t* point_to_project)
 {
-    const float projected_x = project_x(point_to_project->x);
-    const float projected_y = project_y(point_to_project->y);
+    const config_t* cfg = config();
+
+    const float projected_x = project_x(point_to_project->x, cfg->picture_size);
+    const float projected_y = project_y(point_to_project->y, cfg->picture_size, cfg->distance_up);
 
     proj->projected_point.x = projected_x;
     proj->projected_point.y = projected_y;
@@ -158,23 +155,21 @@ void calculate_grid_points(void)
 #ifdef LASER_DEBUG
     uint64_t ns_before = ns_now();
 #endif
-    const int steps_yaw = steps_per_revolution_yaw();
-    const int steps_pitch = steps_per_revolution_pitch();
+    const config_t* cfg = config();
+    const float dist_up = cfg->distance_up;
+    const float dist_to_wall = cfg->distance_to_wall;
+    const float pic_size = cfg->picture_size;
 
-    const float angle_step_yaw = TWO_PI / (float)steps_yaw;
-    const float angle_step_pitch = TWO_PI / (float)steps_pitch;
+    const float angle_step_yaw = TWO_PI / (float)cfg->steps_per_revolution_yaw;
+    const float angle_step_pitch = TWO_PI / (float)cfg->steps_per_revolution_pitch;
 
-    const float dist_up = distance_up();
-    const float dist_to_wall = distance_to_wall();
-    const float pic_size = picture_size();
+    const float ideal_y_start_angle = atanf(dist_up / dist_to_wall);
+    const float ideal_y_stop_angle = atanf((pic_size + dist_up) / dist_to_wall);
+    const float ideal_x_stop_angle = atanf((pic_size / 2) / dist_to_wall);
 
-    const float wanted_y_start_angle = atanf(dist_up / dist_to_wall);
-    const float wanted_y_stop_angle = atanf((pic_size + dist_up) / dist_to_wall);
-    const float wanted_x_stop_angle = atanf((pic_size / 2) / dist_to_wall);
-
-    const size_t start_y = (size_t)(wanted_y_start_angle / angle_step_pitch) + 1;
-    const size_t stop_y = (size_t)(wanted_y_stop_angle / angle_step_pitch) + 1;
-    const size_t stop_x = (size_t)(wanted_x_stop_angle / angle_step_yaw) + 1;
+    const size_t start_y = (size_t)(ideal_y_start_angle / angle_step_pitch) + 1;
+    const size_t stop_y = (size_t)(ideal_y_stop_angle / angle_step_pitch) + 1;
+    const size_t stop_x = (size_t)(ideal_x_stop_angle / angle_step_yaw) + 1;
 
     grid_length_x = stop_x * 2;
     grid_length_y = stop_y - start_y;
@@ -208,7 +203,7 @@ void calculate_grid_points(void)
         const float pitch = angle_step_pitch * (float)(y + start_y);
         grid_members_y[y].coord = project_angle_pitch(pitch, dist_to_wall);
         grid_members_y[y].angle = pitch;
-        grid_members_x[y].index = y;
+        grid_members_y[y].index = y;
     }
 
 #ifdef LASER_DEBUG
@@ -245,4 +240,3 @@ void free_grid_points(void)
     grid_members_x = NULL;
     grid_members_y = NULL;
 }
-

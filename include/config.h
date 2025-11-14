@@ -1,28 +1,16 @@
 #pragma once
 
-extern int g_steps_per_revolution_yaw;
-extern int g_steps_per_revolution_pitch;
+#include <stddef.h>
 
-int steps_per_revolution_yaw(void);
-int steps_per_revolution_pitch(void);
+typedef struct {
+    size_t steps_per_revolution_yaw;
+    size_t steps_per_revolution_pitch;
+    size_t motor_speed;
 
-void set_steps_per_revolution_yaw(int steps_per_revolution_yaw);
-void set_steps_per_revolution_pitch(int steps_per_revolution_pitch);
+    float picture_size;
+    float distance_to_wall;
+    float distance_up;
+} config_t;
 
-extern bool g_must_recalculate_pictures;
-extern float g_picture_size;
-extern float g_distance_to_wall;
-extern float g_distance_up;
-extern float g_motor_speed;
-
-bool must_recalculate_pictures(void);
-float picture_size(void);
-float distance_to_wall(void);
-float distance_up(void);
-float motor_speed(void);
-
-void set_must_recalculate_pictures(bool new);
-void set_motor_speed(float new_speed);
-void set_picture_size(float new_picture_size);
-void set_distance_to_wall(float new_distance_to_wall);
-void set_distance_up(float new_distance_up);
+const config_t* config();
+void set_config(const config_t* new_config);

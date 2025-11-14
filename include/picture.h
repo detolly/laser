@@ -1,8 +1,24 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdint.h>
 
 #include <laser_math.h>
+
+typedef enum {
+    DIRECTION_FORWARD,
+    DIRECTION_BACKWARD,
+} direction_enum_t;
+
+typedef struct __attribute__((packed)) {
+    uint16_t steps : 15;
+    direction_enum_t direction : 1;
+} motor_instruction_t;
+
+typedef struct {
+    motor_instruction_t yaw;
+    motor_instruction_t pitch;
+} motor_instruction_pair_t;
 
 typedef struct {
     point_t* points;
