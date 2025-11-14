@@ -1,4 +1,4 @@
-CFLAGS += -Wall -Wextra -std=c23 -Iinclude -O3 -DLASER_DEBUG
+CFLAGS += -Wall -Wextra -std=c99 -Iinclude -O3 -DLASER_DEBUG
 BINARIES = motor_test projection_test
 SOURCES = src/motor.c src/laser_math.c src/picture.c src/config.c
 

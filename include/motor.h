@@ -11,7 +11,7 @@ void motor_init();
 void start_motor();
 void stop_motor();
 
-bool motor_is_running();
+char motor_is_running();
 
 void start_motor_thread();
 void stop_motor_thread();

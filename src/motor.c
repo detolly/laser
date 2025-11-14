@@ -16,8 +16,8 @@
 #include <pigpio.h>
 #endif
 
-volatile bool should_quit = false;
-volatile bool motor_should_run = false;
+volatile char should_quit = 0;
+volatile char motor_should_run = 0;
 
 pthread_t g_current_motor_thread = 0;
 
@@ -88,7 +88,7 @@ static size_t max(size_t a, size_t b)
     return a > b ? a : b;
 }
 
-#define MICROSECONDS_IN_SECONDS 1'000'000
+#define MICROSECONDS_IN_SECONDS 1000000
 
 static void run_program_in_thread()
 {
@@ -158,8 +158,8 @@ void stop_motor_thread()
     assert(g_current_motor_thread != 0);
 
     pthread_mutex_lock(&mutex);
-    should_quit = true;
-    motor_should_run = false;
+    should_quit = 1;
+    motor_should_run = 0;
     fputs("waiting for motor to shut down...\n", stderr);
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
@@ -175,7 +175,7 @@ void start_motor()
     assert(g_current_motor_thread != 0);
     assert(!motor_should_run);
     assert(current_picture);
-    motor_should_run = true;
+    motor_should_run = 1;
     SIGNAL();
 }
 
@@ -183,14 +183,14 @@ void stop_motor()
 {
     assert(motor_should_run);
     pthread_mutex_lock(&mutex);
-    motor_should_run = false;
+    motor_should_run = 0;
     fputs("waiting for motor to shut down...\n", stderr);
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
     fputs("motor shut down\n", stderr);
 }
 
-bool motor_is_running()
+char motor_is_running()
 {
     return motor_should_run;
 }

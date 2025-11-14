@@ -17,7 +17,7 @@ const config_t* config() { return &g_config; }
 
 void set_config(const config_t* new_config)
 {
-    bool must_recalculate = (g_config.distance_up != new_config->distance_up ||
+    char must_recalculate = (g_config.distance_up != new_config->distance_up ||
                              g_config.distance_to_wall != new_config->distance_to_wall ||
                              g_config.picture_size != new_config->picture_size ||
                              g_config.steps_per_revolution_pitch != new_config->steps_per_revolution_pitch ||
@@ -27,7 +27,7 @@ void set_config(const config_t* new_config)
     if (!must_recalculate)
         return;
 
-    const bool should_restart = motor_is_running();
+    const char should_restart = motor_is_running();
     if (should_restart)
         stop_motor();
 
