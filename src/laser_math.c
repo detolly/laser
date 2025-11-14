@@ -109,9 +109,7 @@ static void find_grid_point_closest_to_projected_point(grid_member_t** x,
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
-    fprintf(stderr, "searching calculated_grid_points took %f us.\n", us);
-    // fprintf(stderr, "grid index: %lu\n", least_distance_index);
-    // fprintf(stderr, "grid x: %f y: %f\n", grid_point->point.x, grid_point->point.y);
+    fprintf(stderr, "searching grid took %f us.\n", us);
 #endif
 }
 
