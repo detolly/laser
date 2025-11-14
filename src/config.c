@@ -24,11 +24,17 @@ void set_config(const config_t* new_config)
                              g_config.steps_per_revolution_yaw != new_config->steps_per_revolution_yaw);
 
     g_config = *new_config;
+    if (!must_recalculate)
+        return;
 
-    if (must_recalculate) {
+    const bool should_restart = motor_is_running();
+    if (should_restart)
         stop_motor();
-        calculate_grid_points();
-        // FIXME: recalculate pictures
+
+    calculate_grid_points();
+
+    // FIXME: recalculate pictures
+
+    if (should_restart)
         start_motor();
-    }
 }

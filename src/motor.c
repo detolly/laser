@@ -117,6 +117,8 @@ void start_motor_thread()
 
 void stop_motor_thread()
 {
+    assert(g_current_motor_thread != 0);
+
     pthread_mutex_lock(&mutex);
     should_quit = true;
     motor_should_run = false;
@@ -129,6 +131,7 @@ void stop_motor_thread()
 
 void start_motor()
 {
+    assert(g_current_motor_thread != 0);
     assert(!motor_should_run);
     assert(current_picture);
     motor_should_run = true;
