@@ -1,5 +1,5 @@
 CC       = gcc
-CFLAGS   = -Wall -Wextra -std=c23 -Iinclude -march=native -DLASER_DEBUG=1 -O3
+CFLAGS   = -Wall -Wextra -std=c23 -Iinclude -march=native -O3
 LDFLAGS  = -lm -flto
 
 BINARIES = bin/projection_test bin/motor_test
@@ -7,7 +7,10 @@ SOURCES  = config.c picture.c motor.c laser_math.c
 COMMON   = $(SOURCES:%.c=src/%.o)
 BIN_OBJ  = $(BINARIES:bin/%=src/%.o)
 
-all: $(BINARIES)
+all: $(BINARIES) bin/combined
+
+bin/combined:
+	$(CC) $(LDFLAGS) $(CFLAGS) src/combined.c -o bin/combined
 
 $(BINARIES): $(COMMON) $(BIN_OBJ)
 	$(CC) $(LDFLAGS) $(COMMON) $(@:bin/%=src/%.o) -o $@
