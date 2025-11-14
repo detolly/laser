@@ -23,6 +23,8 @@ int main(int argc, const char* argv[])
     //     // printf("%f,%f\n", points[i].x, points[i].y);
     // }
 
+    motor_init();
+
     start_motor_thread();
     calculate_grid_points();
 

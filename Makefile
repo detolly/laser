@@ -54,7 +54,7 @@ $(OBJ_DIR)/%_device.o: %.c | $(OBJ_DIR)/src
 	$(DEV_CC) $(DEV_CFLAGS) -c $< -o $@
 
 transfer: device
-	scp -r $(DEV_BIN_DIR) thomas@pi:/home/thomas/laser
+	scp -r $(DEV_BIN_DIR) thomas@pi:/home/thomas/laser-build
 
 clean:
 	rm -rf src/*.o $(HOST_BIN_DIR)/* $(DEV_BIN_DIR)/* $(OBJ_DIR)/*

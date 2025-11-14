@@ -6,6 +6,8 @@
 #include <laser_math.h>
 #include <picture.h>
 
+void motor_init();
+
 void start_motor();
 void stop_motor();
 

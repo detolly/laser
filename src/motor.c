@@ -73,7 +73,8 @@ void motor_init()
 {
 #ifdef LASER_DEVICE
     int rc = gpioInitialise();
-    assert(rc != 0);
+    fprintf(stderr, "rc = %d\n", rc);
+    assert(rc >= 0);
 
     gpioSetMode(YAW_DIRECTION_GPIO, PI_OUTPUT);
     gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT);
