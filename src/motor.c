@@ -95,7 +95,6 @@ void* motor_thread(void*)
 
         fputs("motor_thread: motor stopped... signaling that we have stopped\n", stderr);
         SIGNAL();
-        fputs("motor_thread: signal was received\n", stderr);
 
         if (should_quit)
             break;
@@ -122,10 +121,13 @@ void stop_motor_thread()
     pthread_mutex_lock(&mutex);
     should_quit = true;
     motor_should_run = false;
+    fputs("waiting for motor to shut down...\n", stderr);
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
+    fputs("motor shut down\n", stderr);
 
     pthread_join(g_current_motor_thread, NULL);
+    fputs("motor thread exited\n", stderr);
     g_current_motor_thread = 0;
 }
 
@@ -143,8 +145,10 @@ void stop_motor()
     assert(motor_should_run);
     pthread_mutex_lock(&mutex);
     motor_should_run = false;
+    fputs("waiting for motor to shut down...\n", stderr);
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
+    fputs("motor shut down\n", stderr);
 }
 
 bool motor_is_running()
