@@ -1,6 +1,7 @@
 #include <config.h>
 
 #include <laser_math.h>
+#include <motor.h>
 
 config_t g_config = {
     .steps_per_revolution_yaw = 15000,
@@ -24,8 +25,10 @@ void set_config(const config_t* new_config)
 
     g_config = *new_config;
 
-    if (must_recalculate)
+    if (must_recalculate) {
+        stop_motor();
         calculate_grid_points();
-
-    // FIXME: recalculate pictures
+        // FIXME: recalculate pictures
+        start_motor();
+    }
 }

@@ -63,7 +63,7 @@ static void run_program_in_thread()
     const ll sleep_time = (ll)MICROSECONDS_IN_SECONDS / ((rpm * steps) / 60) + 1;
 
 #ifdef LASER_DEBUG
-    fprintf(stderr, "sleep_time: %llu\n", sleep_time);
+    // fprintf(stderr, "sleep_time: %llu\n", sleep_time);
 #endif
 
     for(size_t i = 0; i < current_picture->num_points; i++) {
@@ -89,16 +89,23 @@ void* motor_thread(void*)
     pthread_setschedparam(g_current_motor_thread, SCHED_FIFO, &prio);
 
     while(!should_quit) {
+        fputs("motor_thread: starting motor\n", stderr);
         while(motor_should_run)
             run_program_in_thread();
+
+        fputs("motor_thread: motor stopped... signaling that we have stopped\n", stderr);
+        SIGNAL();
+        fputs("motor_thread: signal was received\n", stderr);
 
         if (should_quit)
             break;
 
-        fputs("motor_thread: motor stopped... waiting for signal", stderr);
+        fputs("motor_thread: waiting for wake-up\n", stderr);
         WAIT();
-        fputs("motor_thread: woken up... starting motor", stderr);
+        fputs("motor_thread: woken up\n", stderr);
     }
+
+    fputs("motor_thread: quitting thread.\n", stderr);
     return NULL;
 }
 
@@ -110,8 +117,12 @@ void start_motor_thread()
 
 void stop_motor_thread()
 {
+    pthread_mutex_lock(&mutex);
     should_quit = true;
     motor_should_run = false;
+    pthread_cond_wait(&cond, &mutex);
+    pthread_mutex_unlock(&mutex);
+
     pthread_join(g_current_motor_thread, NULL);
     g_current_motor_thread = 0;
 }
@@ -127,7 +138,10 @@ void start_motor()
 void stop_motor()
 {
     assert(motor_should_run);
+    pthread_mutex_lock(&mutex);
     motor_should_run = false;
+    pthread_cond_wait(&cond, &mutex);
+    pthread_mutex_unlock(&mutex);
 }
 
 bool motor_is_running()

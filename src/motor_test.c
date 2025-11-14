@@ -33,7 +33,7 @@ int main(int argc, const char* argv[])
     set_picture(&picture);
     start_motor();
     sleep(2);
-    fputs("slept for 2", stderr);
+    fputs("slept for 2\n", stderr);
     stop_motor();
     sleep(2);
     start_motor();
