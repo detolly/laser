@@ -34,6 +34,8 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 const picture_t* current_picture = NULL;
 
+#ifndef LASER_DEVICE
+
 #define DIRECTION_YAW(d) do {} while (0)
 #define PULSE_YAW() do {} while (0)
 
@@ -44,6 +46,37 @@ const picture_t* current_picture = NULL;
     struct timespec t = { .tv_sec = 0, .tv_nsec = us * 1000 };      \
     clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
 } while(0)
+
+#else
+
+#define YAW_DIRECTION_GPIO 13
+#define YAW_PULSE_GPIO 6
+
+#define PITCH_DIRECTION_GPIO 26
+#define PITCH_PULSE_GPIO 19
+
+#define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
+#define PULSE_YAW() gpioWrite(YAW_PULSE_GPIO, 1); gpioWrite(YAW_PULSE_GPIO, 0)
+
+#define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0);
+#define PULSE_YAW() gpioWrite(PITCH_PULSE_GPIO, 1); gpioWrite(PITCH_PULSE_GPIO, 0)
+
+#define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us);
+
+#endif
+
+void motor_init()
+{
+#ifdef LASER_DEVICE
+    int rc = gpioInitialise();
+    assert(rc != 0);
+
+    gpioSetMode(YAW_DIRECTION_GPIO, PI_OUTPUT);
+    gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT);
+    gpioSetMode(PITCH_DIRECTION_GPIO, PI_OUTPUT);
+    gpioSetMode(PITCH_PULSE_GPIO, PI_OUTPUT);
+#endif
+}
 
 static size_t max(size_t a, size_t b)
 {
