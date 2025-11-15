@@ -46,7 +46,7 @@ const picture_t* current_picture = NULL;
 
 #ifndef LASER_DEVICE
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 2
+#define BETWEEN_PULSE_SLEEP_TIME_US 1
 
 #define DIRECTION_YAW(d) do {} while (0)
 #define DIRECTION_PITCH(d) do {} while (0)
@@ -61,7 +61,7 @@ const picture_t* current_picture = NULL;
 
 #else
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 10
+#define BETWEEN_PULSE_SLEEP_TIME_US 1
 
 // #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
 #define SLEEP(us) gpioDelay(us)
@@ -110,7 +110,7 @@ static void run_program_in_thread()
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
-        SLEEP(1);
+        SLEEP(25);
 	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
             if (i < instr->yaw.steps)
