@@ -106,11 +106,16 @@ static void run_program_in_thread()
     fprintf(stderr, "sleep_time: %llu microseconds\n", sleep_time);
 #endif
 
+    direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
+    direction_enum_t previous_direction_pitch = DIRECTION_FORWARD;
+
     for(size_t i = 0; i < current_picture->num_points; i++) {
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
-        SLEEP(25);
+        if (i == 0 || previous_direction_pitch != instr->pitch.direction
+                   || previous_direction_yaw != instr->yaw.direction)
+            SLEEP(25);
 	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
             if (i < instr->yaw.steps)
