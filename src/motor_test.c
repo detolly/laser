@@ -19,7 +19,6 @@
 int main(int argc, const char* argv[])
 {
     assert(argc == 7);
-    fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
 
     config_t cfg;
     cfg.distance_up = (float)atof(argv[1]);
