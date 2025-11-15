@@ -46,7 +46,7 @@ const picture_t* current_picture = NULL;
 
 #ifndef LASER_DEVICE
 
-#define SLEEP_TIME 10
+#define BETWEEN_PULSE_SLEEP_TIME_US 10
 
 #define DIRECTION_YAW(d) do {} while (0)
 #define DIRECTION_PITCH(d) do {} while (0)
@@ -61,7 +61,7 @@ const picture_t* current_picture = NULL;
 
 #else
 
-#define SLEEP_TIME 10
+#define BETWEEN_PULSE_SLEEP_TIME_US 10
 
 #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
 
@@ -116,14 +116,14 @@ static void run_program_in_thread()
             if (i < instr->pitch.steps)
                 PULSE_ON(PITCH_PULSE_GPIO);
 
-            SLEEP(SLEEP_TIME); 
+            SLEEP(BETWEEN_PULSE_SLEEP_TIME_US); 
 
             if (i < instr->yaw.steps)
-                PULSE_ON(YAW_PULSE_GPIO);
+                PULSE_OFF(YAW_PULSE_GPIO);
             if (i < instr->pitch.steps)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            const ll new_sleep_time = maxll(sleep_time - SLEEP_TIME, 0);
+            const ll new_sleep_time = maxll(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
             fprintf(stderr, "new sleep time: %llu\n", new_sleep_time);
 
             SLEEP(new_sleep_time);
