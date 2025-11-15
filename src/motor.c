@@ -98,7 +98,7 @@ static void run_program_in_thread()
     const config_t* cfg = config();
 
     const ll rpm = (ll)cfg->motor_speed;
-    const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_yaw);
+    const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
     const ll sleep_time = (ll)(60 * MICROSECONDS_IN_SECONDS) / (rpm * steps) + 1;
 
 #ifdef LASER_DEBUG
