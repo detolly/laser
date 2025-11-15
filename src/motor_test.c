@@ -8,18 +8,18 @@
 #include <motor.h>
 #include <picture.h>
 
-#define NUM_POINTS 100
-#include <math.h>
-static point_t points[NUM_POINTS] = {0};
+// #define NUM_POINTS 100
+// #include <math.h>
+// static point_t points[NUM_POINTS] = {0};
 
-// #include <points/game_of_thrones.h>
-// #define NUM_POINTS sizeof(points) / sizeof(point_t)
-// #define GENERATED
+#include <points/game_of_thrones.h>
+#define NUM_POINTS sizeof(points) / sizeof(point_t)
+#define GENERATED
 
 int main(int argc, const char* argv[])
 {
     assert(argc == 7);
-   fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
+    fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
 
     config_t cfg;
     cfg.distance_up = (float)atof(argv[1]);
@@ -56,7 +56,6 @@ int main(int argc, const char* argv[])
     set_picture(&picture);
     start_motor();
     sleep(10);
-    stop_motor();
     stop_motor_thread();
 
     picture_free(&picture);

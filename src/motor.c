@@ -124,7 +124,10 @@ static void run_program_in_thread()
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
             const size_t new_sleep_time = max((size_t)sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
+
+            #ifdef LASER_DEBUG
             fprintf(stderr, "new sleep time: %lu\n", new_sleep_time);
+            #endif
 
             SLEEP((ll)new_sleep_time);
         }
