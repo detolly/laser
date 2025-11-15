@@ -18,15 +18,8 @@ static point_t points[NUM_POINTS] = {0};
 
 int main(int argc, const char* argv[])
 {
-    assert(argc == 6);
-
-    fprintf(stderr, "Using parameters: \n");
-    fprintf(stderr, "\tdistance_up: %s\n", argv[1]);
-    fprintf(stderr, "\tdistance_to_wall: %s\n", argv[2]);
-    fprintf(stderr, "\tpicture_size: %s\n", argv[3]);
-    fprintf(stderr, "\tsteps_per_revolution_yaw: %s\n", argv[4]);
-    fprintf(stderr, "\tsteps_per_revolution_pitch: %s\n", argv[5]);
-    fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
+    assert(argc == 7);
+   fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
 
     config_t cfg;
     cfg.distance_up = (float)atof(argv[1]);
@@ -35,6 +28,15 @@ int main(int argc, const char* argv[])
     cfg.steps_per_revolution_yaw = (size_t)atoi(argv[4]);
     cfg.steps_per_revolution_pitch = (size_t)atoi(argv[5]);
     cfg.motor_speed = (size_t)atoi(argv[6]);
+ 
+    fprintf(stderr, "Using parameters: \n");
+    fprintf(stderr, "\tdistance_up: %f m\n", cfg.distance_up);
+    fprintf(stderr, "\tdistance_to_wall: %f m\n", cfg.distance_to_wall);
+    fprintf(stderr, "\tpicture_size: %f m\n", cfg.picture_size);
+    fprintf(stderr, "\tsteps_per_revolution_yaw: %lu steps\n", cfg.steps_per_revolution_yaw);
+    fprintf(stderr, "\tsteps_per_revolution_pitch: %lu steps\n", cfg.steps_per_revolution_pitch);
+    fprintf(stderr, "\tmotor_speed: %lu rpm\n", cfg.motor_speed);
+
     set_config(&cfg);
 
 #ifndef GENERATED
