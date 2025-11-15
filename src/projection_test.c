@@ -10,19 +10,18 @@
 
 #include <points/game_of_thrones.h>
 #define NUM_POINTS sizeof(points) / sizeof(point_t)
+#define GENERATED
 
 int main(int argc, const char* argv[])
 {
-    (void)argc;
-    (void)argv;
+    set_config_from_argv(argc, argv);
 
-    // for(int i = 0; i < NUM_POINTS; i++) {
-    //     points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
-    //     points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
-    //     // printf("%f,%f\n", points[i].x, points[i].y);
-    // }
-
-    calculate_grid_points();
+#ifndef GENERATED
+    for(int i = 0; i < NUM_POINTS; i++) {
+        points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
+        points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
+    }
+#endif
 
     picture_t picture = {0};
     picture_from_points(&picture, points, NUM_POINTS);

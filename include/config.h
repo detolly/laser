@@ -13,4 +13,6 @@ typedef struct {
 } config_t;
 
 const config_t* config();
+
 void set_config(const config_t* new_config);
+void set_config_from_argv(const int argc, const char* argv[]);
