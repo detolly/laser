@@ -46,7 +46,7 @@ const picture_t* current_picture = NULL;
 
 #ifndef LASER_DEVICE
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 5
+#define BETWEEN_PULSE_SLEEP_TIME_US 2
 
 #define DIRECTION_YAW(d) do {} while (0)
 #define DIRECTION_PITCH(d) do {} while (0)
@@ -124,12 +124,7 @@ static void run_program_in_thread()
             if (i < instr->pitch.steps)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            const size_t new_sleep_time = max((size_t)sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
-
-            #ifdef LASER_DEBUG
-            fprintf(stderr, "new sleep time: %lu\n", new_sleep_time);
-            #endif
-
+            const long long new_sleep_time = maxl(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
             SLEEP((ll)new_sleep_time);
         }
     }
@@ -183,10 +178,6 @@ void stop_motor_thread()
     pthread_join(g_current_motor_thread, NULL);
     fputs("motor thread exited\n", stderr);
     g_current_motor_thread = 0;
-
-#ifdef LASER_DEVICE
-    gpioTerminate();
-#endif
 }
 
 void start_motor()
@@ -207,6 +198,13 @@ void stop_motor()
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
     fputs("motor shut down\n", stderr);
+}
+
+void motor_free()
+{
+#ifdef LASER_DEVICE
+    gpioTerminate();
+#endif
 }
 
 char motor_is_running()

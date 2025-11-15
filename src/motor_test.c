@@ -41,4 +41,5 @@ int main(int argc, const char* argv[])
 
     picture_free(&picture);
     free_grid_points();
+    motor_free();
 }

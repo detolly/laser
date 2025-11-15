@@ -19,3 +19,5 @@ void stop_motor_thread();
 void set_picture(const picture_t* picture);
 
 pthread_t current_motor_thread();
+
+void motor_free();
