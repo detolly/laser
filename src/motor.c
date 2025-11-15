@@ -63,7 +63,8 @@ const picture_t* current_picture = NULL;
 
 #define BETWEEN_PULSE_SLEEP_TIME_US 10
 
-#define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
+// #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
+#define SLEEP(us) gpioDelay(us)
 
 #define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
 #define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
