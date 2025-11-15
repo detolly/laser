@@ -46,7 +46,7 @@ const picture_t* current_picture = NULL;
 
 #ifndef LASER_DEVICE
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 10
+#define BETWEEN_PULSE_SLEEP_TIME_US 5
 
 #define DIRECTION_YAW(d) do {} while (0)
 #define DIRECTION_PITCH(d) do {} while (0)
@@ -89,6 +89,7 @@ void motor_init()
 
 typedef long long ll;
 static size_t max(size_t a, size_t b) { return a > b ? a : b; }
+static long maxl(long a, long b) { return a > b ? a : b; }
 
 #define MICROSECONDS_IN_SECONDS 1000000
 
@@ -98,7 +99,7 @@ static void run_program_in_thread()
 
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_yaw);
-    const ll sleep_time = (ll)MICROSECONDS_IN_SECONDS / ((rpm * steps) / 60) + 1;
+    const ll sleep_time = (ll)(60 * MICROSECONDS_IN_SECONDS) / (rpm * steps) + 1;
 
 #ifdef LASER_DEBUG
     fprintf(stderr, "sleep_time: %llu microseconds\n", sleep_time);
