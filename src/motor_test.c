@@ -12,11 +12,20 @@
 
 #include <points/game_of_thrones.h>
 #define NUM_POINTS sizeof(points) / sizeof(point_t)
+#define GENERATED
 
 int main(int argc, const char* argv[])
 {
     (void)argc;
     (void)argv;
+
+    fprintf(stderr, "Using parameters: \n");
+    fprintf(stderr, "\tdistance_up: %s\n", argv[1]);
+    fprintf(stderr, "\tdistance_to_wall: %s\n", argv[2]);
+    fprintf(stderr, "\tpicture_size: %s\n", argv[3]);
+    fprintf(stderr, "\tsteps_per_revolution_yaw: %s\n", argv[4]);
+    fprintf(stderr, "\tsteps_per_revolution_pitch: %s\n", argv[5]);
+    fprintf(stderr, "\tmotor_speed: %s\n", argv[6]);
 
     config_t cfg;
     cfg.distance_up = (float)atof(argv[1]);
@@ -27,11 +36,13 @@ int main(int argc, const char* argv[])
     cfg.motor_speed = (size_t)atoi(argv[6]);
     set_config(&cfg);
 
-    // for(int i = 0; i < NUM_POINTS; i++) {
-    //     points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
-    //     points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
-    //     // printf("%f,%f\n", points[i].x, points[i].y);
-    // }
+#ifndef GENERATED
+    for(int i = 0; i < NUM_POINTS; i++) {
+        points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
+        points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
+        printf("%f,%f\n", points[i].x, points[i].y);
+    }
+#endif
 
     motor_init();
     start_motor_thread();
@@ -41,12 +52,8 @@ int main(int argc, const char* argv[])
 
     set_picture(&picture);
     start_motor();
-    sleep(2);
-    fputs("slept for 2\n", stderr);
+    sleep(10);
     stop_motor();
-    sleep(2);
-    start_motor();
-    sleep(2);
     stop_motor_thread();
 
     picture_free(&picture);
