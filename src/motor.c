@@ -168,14 +168,13 @@ void start_motor_thread()
 void stop_motor_thread()
 {
     assert(g_current_motor_thread != 0);
-
-    pthread_mutex_lock(&mutex);
     should_quit = 1;
-    motor_should_run = 0;
-    fputs("waiting for motor to shut down...\n", stderr);
-    pthread_cond_wait(&cond, &mutex);
-    pthread_mutex_unlock(&mutex);
-    fputs("motor shut down\n", stderr);
+
+    if (motor_should_run) {
+        stop_motor();
+    } else {
+        SIGNAL();
+    }
 
     pthread_join(g_current_motor_thread, NULL);
     fputs("motor thread exited\n", stderr);
