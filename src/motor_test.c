@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,17 +8,17 @@
 #include <motor.h>
 #include <picture.h>
 
-// #define NUM_POINTS 100
-// static point_t points[NUM_POINTS] = {0};
+#define NUM_POINTS 100
+#include <math.h>
+static point_t points[NUM_POINTS] = {0};
 
-#include <points/game_of_thrones.h>
-#define NUM_POINTS sizeof(points) / sizeof(point_t)
-#define GENERATED
+// #include <points/game_of_thrones.h>
+// #define NUM_POINTS sizeof(points) / sizeof(point_t)
+// #define GENERATED
 
 int main(int argc, const char* argv[])
 {
-    (void)argc;
-    (void)argv;
+    assert(argc == 6);
 
     fprintf(stderr, "Using parameters: \n");
     fprintf(stderr, "\tdistance_up: %s\n", argv[1]);

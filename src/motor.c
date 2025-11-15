@@ -4,10 +4,10 @@
 
 #include <assert.h>
 #include <pthread.h>
+#include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <sched.h>
 
 #include <config.h>
 #include <laser_math.h>
@@ -89,7 +89,6 @@ void motor_init()
 
 typedef long long ll;
 static size_t max(size_t a, size_t b) { return a > b ? a : b; }
-static ll maxll(ll a, ll b) { return a > b ? a : b; }
 
 #define MICROSECONDS_IN_SECONDS 1000000
 
@@ -109,6 +108,7 @@ static void run_program_in_thread()
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
+        SLEEP(1);
 	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
             if (i < instr->yaw.steps)
@@ -123,10 +123,10 @@ static void run_program_in_thread()
             if (i < instr->pitch.steps)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            const ll new_sleep_time = maxll(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
-            fprintf(stderr, "new sleep time: %llu\n", new_sleep_time);
+            const size_t new_sleep_time = max((size_t)sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
+            fprintf(stderr, "new sleep time: %lu\n", new_sleep_time);
 
-            SLEEP(new_sleep_time);
+            SLEEP((ll)new_sleep_time);
         }
     }
 }
