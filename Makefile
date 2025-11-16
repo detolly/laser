@@ -48,10 +48,10 @@ $(OBJ_DIR)/src:
 # $(DEV_BIN_DIR)/combined: src/combined.c
 # 	$(DEV_CC) $(DEV_LDFLAGS) $(DEV_CFLAGS) $< -o $@
 
-$(HOST_BIN_DIR)/%: $(HOST_OBJ) $(OBJ_DIR)/src/%_host.o | $(OBJ_DIR)/src
+$(HOST_BIN_DIR)/%: $(HOST_OBJ) $(OBJ_DIR)/src/%_host.o | $(OBJ_DIR)/src $(HOST_BIN_DIR)
 	$(HOST_CC) $^ $(HOST_LDFLAGS) -o $@
 
-$(DEV_BIN_DIR)/%: $(DEV_OBJ) $(OBJ_DIR)/src/%_device.o | $(OBJ_DIR)/src
+$(DEV_BIN_DIR)/%: $(DEV_OBJ) $(OBJ_DIR)/src/%_device.o | $(OBJ_DIR)/src $(DEV_BIN_DIR)
 	$(DEV_CC) $(DEV_LDFLAGS) $^ -o $@
 
 .SECONDARY:
@@ -66,4 +66,4 @@ transfer: device
 	scp -r $(DEV_BIN_DIR) thomas@pi:/home/thomas/laser-build
 
 clean:
-	rm -rf src/*.o $(HOST_BIN_DIR)/* $(DEV_BIN_DIR)/* $(OBJ_DIR)/*
+	rm -rf target

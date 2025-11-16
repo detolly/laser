@@ -83,12 +83,14 @@ static void run_program_in_thread()
 
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
-    const ll sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
+    const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
-    DEBUG("sleep_time: %llu microseconds\n", sleep_time);
+    DEBUG("sleep_time: %llu microseconds\n", ideal_sleep_time);
 
     direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
     direction_enum_t previous_direction_pitch = DIRECTION_FORWARD;
+
+    const ll new_sleep_time = maxl((ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US) / 2, BETWEEN_PULSE_SLEEP_TIME_US);
 
     for(size_t i = 0; i < current_picture->num_points; i++) {
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
@@ -109,15 +111,14 @@ static void run_program_in_thread()
             if (i < instr->pitch.steps)
                 PULSE_ON(PITCH_PULSE_GPIO);
 
-            SLEEP(BETWEEN_PULSE_SLEEP_TIME_US); 
+            SLEEP(new_sleep_time);
 
             if (i < instr->yaw.steps)
                 PULSE_OFF(YAW_PULSE_GPIO);
             if (i < instr->pitch.steps)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            const ll new_sleep_time = maxl(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, BETWEEN_PULSE_SLEEP_TIME_US);
-            SLEEP((ll)new_sleep_time);
+            SLEEP(new_sleep_time + 1);
         }
     }
 }
