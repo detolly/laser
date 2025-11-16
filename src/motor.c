@@ -80,17 +80,15 @@ static long maxl(long a, long b) { return a > b ? a : b; }
 static void run_program_in_thread()
 {
     const config_t* cfg = config();
-
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
     const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
-    DEBUG("sleep_time: %llu microseconds\n", ideal_sleep_time);
+    const ll new_sleep_time = maxl((ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US) / 2, BETWEEN_PULSE_SLEEP_TIME_US);
+    DEBUG("sleep_time: %llu microseconds | new_sleep_time: %llu microseconds\n", ideal_sleep_time, new_sleep_time);
 
     direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
     direction_enum_t previous_direction_pitch = DIRECTION_FORWARD;
-
-    const ll new_sleep_time = maxl((ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US) / 2, BETWEEN_PULSE_SLEEP_TIME_US);
 
     for(size_t i = 0; i < current_picture->num_points; i++) {
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
@@ -98,11 +96,12 @@ static void run_program_in_thread()
         DIRECTION_PITCH(instr->pitch.direction);
 
         if (i == 0 || previous_direction_pitch != instr->pitch.direction
-                   || previous_direction_yaw != instr->yaw.direction)
+                   || previous_direction_yaw != instr->yaw.direction) {
+            previous_direction_yaw = instr->yaw.direction;
+            previous_direction_pitch = instr->pitch.direction;
             SLEEP(DIRECTION_SLEEP_TIME);
+        }
 
-        previous_direction_yaw = instr->yaw.direction;
-        previous_direction_pitch = instr->pitch.direction;
 
 	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
