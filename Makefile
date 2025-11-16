@@ -34,13 +34,10 @@ DEV_BINARIES = $(BINARIES:%=$(DEV_BIN_DIR)/%)
 
 all: host device
 
-host: $(HOST_BINARIES) $(HOST_BIN_DIR)
-device: $(DEV_BINARIES) $(DEV_BIN_DIR)
+host: $(HOST_BINARIES) | $(HOST_BIN_DIR)
+device: $(DEV_BINARIES) | $(DEV_BIN_DIR)
 
-$(HOST_BIN_DIR):
-	mkdir -p $@
-
-$(DEV_BIN_DIR):
+$(HOST_BIN_DIR) $(DEV_BIN_DIR): | $(OBJ_DIR)/src
 	mkdir -p $@
 
 $(OBJ_DIR)/src:
@@ -51,18 +48,18 @@ $(OBJ_DIR)/src:
 # $(DEV_BIN_DIR)/combined: src/combined.c
 # 	$(DEV_CC) $(DEV_LDFLAGS) $(DEV_CFLAGS) $< -o $@
 
-$(HOST_BIN_DIR)/%: $(HOST_OBJ) $(OBJ_DIR)/src/%_host.o
+$(HOST_BIN_DIR)/%: $(HOST_OBJ) $(OBJ_DIR)/src/%_host.o | $(OBJ_DIR)/src
 	$(HOST_CC) $^ $(HOST_LDFLAGS) -o $@
 
-$(DEV_BIN_DIR)/%: $(DEV_OBJ) $(OBJ_DIR)/src/%_device.o
+$(DEV_BIN_DIR)/%: $(DEV_OBJ) $(OBJ_DIR)/src/%_device.o | $(OBJ_DIR)/src
 	$(DEV_CC) $(DEV_LDFLAGS) $^ -o $@
 
 .SECONDARY:
-$(OBJ_DIR)/%_host.o: %.c $(OBJ_DIR)/src
+$(OBJ_DIR)/%_host.o: %.c | $(OBJ_DIR)/src
 	$(HOST_CC) $(HOST_CFLAGS) -c $< -o $@
 
 .SECONDARY:
-$(OBJ_DIR)/%_device.o: %.c $(OBJ_DIR)/src
+$(OBJ_DIR)/%_device.o: %.c | $(OBJ_DIR)/src
 	$(DEV_CC) $(DEV_CFLAGS) -c $< -o $@
 
 transfer: device
