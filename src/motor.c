@@ -16,12 +16,6 @@
 #include <pigpio.h>
 #endif
 
-#define YAW_DIRECTION_GPIO 13
-#define YAW_PULSE_GPIO 6
-
-#define PITCH_DIRECTION_GPIO 26
-#define PITCH_PULSE_GPIO 19
-
 volatile char should_quit = 0;
 volatile char motor_should_run = 0;
 
@@ -45,33 +39,25 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 const picture_t* current_picture = NULL;
 
 #ifndef LASER_DEVICE
+    #define DIRECTION_YAW(d) do {} while (0)
+    #define DIRECTION_PITCH(d) do {} while (0)
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 1
+    #define PULSE_ON(gpio) do {} while (0)
+    #define PULSE_OFF(gpio) do {} while (0)
 
-#define DIRECTION_YAW(d) do {} while (0)
-#define DIRECTION_PITCH(d) do {} while (0)
-
-#define PULSE_ON(gpio) do {} while (0)
-#define PULSE_OFF(gpio) do {} while (0)
-
-#define SLEEP(us) do {                                              \
-    struct timespec t = { .tv_sec = 0, .tv_nsec = us * 1000 };      \
-    clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
-} while(0)
-
+    #define SLEEP(us) do {                                              \
+        struct timespec t = { .tv_sec = 0, .tv_nsec = us * 1000 };      \
+        clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
+    } while(0)
 #else
+    // #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
+    #define SLEEP(us) gpioDelay(us)
 
-#define BETWEEN_PULSE_SLEEP_TIME_US 1
+    #define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
+    #define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
 
-// #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
-#define SLEEP(us) gpioDelay(us)
-
-#define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
-#define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
-
-#define PULSE_ON(gpio) gpioWrite(gpio, 1);
-#define PULSE_OFF(gpio) gpioWrite(gpio, 0);
-
+    #define PULSE_ON(gpio) gpioWrite(gpio, 1);
+    #define PULSE_OFF(gpio) gpioWrite(gpio, 0);
 #endif
 
 void motor_init()
@@ -92,15 +78,13 @@ typedef long long ll;
 static size_t max(size_t a, size_t b) { return a > b ? a : b; }
 static long maxl(long a, long b) { return a > b ? a : b; }
 
-#define MICROSECONDS_IN_SECONDS 1000000
-
 static void run_program_in_thread()
 {
     const config_t* cfg = config();
 
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
-    const ll sleep_time = (ll)(60 * MICROSECONDS_IN_SECONDS) / (rpm * steps) + 1;
+    const ll sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
 #ifdef LASER_DEBUG
     fprintf(stderr, "sleep_time: %llu microseconds\n", sleep_time);
@@ -113,9 +97,14 @@ static void run_program_in_thread()
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
         DIRECTION_YAW(instr->yaw.direction);
         DIRECTION_PITCH(instr->pitch.direction);
+
         if (i == 0 || previous_direction_pitch != instr->pitch.direction
                    || previous_direction_yaw != instr->yaw.direction)
-            SLEEP(25);
+            SLEEP(DIRECTION_SLEEP_TIME);
+
+        previous_direction_yaw = instr->yaw.direction;
+        previous_direction_pitch = instr->pitch.direction;
+
 	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
             if (i < instr->yaw.steps)
@@ -130,7 +119,7 @@ static void run_program_in_thread()
             if (i < instr->pitch.steps)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            const long long new_sleep_time = maxl(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, 0);
+            const ll new_sleep_time = maxl(sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, BETWEEN_PULSE_SLEEP_TIME_US);
             SLEEP((ll)new_sleep_time);
         }
     }

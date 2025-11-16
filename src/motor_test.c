@@ -1,6 +1,4 @@
 #include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 #include <config.h>
@@ -24,7 +22,6 @@ int main(int argc, const char* argv[])
     for(int i = 0; i < NUM_POINTS; i++) {
         points[i].x = cosf((TWO_PI / NUM_POINTS) * (float)i);
         points[i].y = sinf((TWO_PI / NUM_POINTS) * (float)i);
-        printf("%f,%f\n", points[i].x, points[i].y);
     }
 #endif
 
