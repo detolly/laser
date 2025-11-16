@@ -4,7 +4,7 @@ SOURCES = src/motor.c src/grid.c src/picture.c src/config.c
 OBJ_DIR = obj
 
 ifeq ($(DEBUG),1)
-CFLAGS += -DLASER_DEBUG
+CFLAGS += -DLASER_DEBUG -g
 else
 CFLAGS += -O3
 LDFLAGS += -flto

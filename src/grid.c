@@ -17,9 +17,11 @@ void grid_make(grid_t* grid,
     const float angle_step_pitch = TWO_PI / (float)steps_per_revolution_pitch;
 
     const size_t start_y = (size_t)(ideal_pitch_start_angle(distance_up, distance_to_wall) / angle_step_pitch) + 1;
-    const size_t stop_y = (size_t)(ideal_pitch_stop_angle(distance_up, distance_to_wall) / angle_step_pitch) + 1;
+    const size_t stop_y = (size_t)(ideal_pitch_stop_angle(picture_size + distance_up, distance_to_wall) / angle_step_pitch) + 1;
     const size_t start_x = (size_t)(ideal_yaw_start_angle() / angle_step_yaw);
     const size_t stop_x = (size_t)(ideal_yaw_stop_angle(picture_size, distance_to_wall) / angle_step_yaw) + 1;
+
+    DEBUG("%lu -> %lu | %lu -> %lu\n", start_x, stop_x, start_y, stop_y);
 
     const size_t grid_length_x = (stop_x - start_x) * 2;
     const size_t grid_length_y = stop_y - start_y;
@@ -88,8 +90,8 @@ const grid_member_t* binary_search_for_coord(const grid_member_t* member_arr,
     int current_index = 0;
     int left = 0;
     int right = (int)size - 1;
-    const grid_member_t* current_grid_member = NULL;
 
+    const grid_member_t* current_grid_member = NULL;
     while(left <= right) {
         current_index = left + (right - left) / 2;
         current_grid_member = &member_arr[current_index];
@@ -101,6 +103,7 @@ const grid_member_t* binary_search_for_coord(const grid_member_t* member_arr,
         else break;
     }
 
+    assert(current_grid_member != NULL);
     return current_grid_member;
 }
 

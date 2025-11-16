@@ -60,6 +60,8 @@ static void find_grid_point_closest_to_projected_point(const grid_member_t** x,
     *x = binary_search_for_coord(grid.x, grid.grid_length_x, projected_point->x);
     *y = binary_search_for_coord(grid.y, grid.grid_length_y, projected_point->y);
 
+    assert(*x);
+    assert(*y);
 }
 
 static void make_picture_point(picture_point_t* picture_point,
