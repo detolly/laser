@@ -1,16 +1,16 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include <config.h>
-#include <laser_math.h>
-#include <motor.h>
-#include <picture.h>
+#include <laser/config.h>
+#include <laser/math.h>
+#include <laser/motor.h>
+#include <laser/picture.h>
 
 // #define NUM_POINTS 100
 // #include <math.h>
 // static point_t points[NUM_POINTS] = {0};
 
-#include <points/game_of_thrones.h>
+#include <laser/points/game_of_thrones.h>
 #define NUM_POINTS sizeof(points) / sizeof(point_t)
 #define GENERATED
 
@@ -28,15 +28,13 @@ int main(int argc, const char* argv[])
     motor_init();
     start_motor_thread();
 
-    picture_t picture = {0};
-    picture_from_points(&picture, points, NUM_POINTS);
+    picture_t* picture = managed_picture_from_points(points, NUM_POINTS);
+    set_picture(picture);
 
-    set_picture(&picture);
     start_motor();
     sleep(10);
     stop_motor_thread();
 
-    picture_free(&picture);
-    free_grid_points();
+    free_managed_pictures();
     motor_free();
 }

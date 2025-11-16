@@ -1,6 +1,6 @@
 CFLAGS += -Wall -Wextra -std=c99 -Iinclude
 BINARIES = motor_test projection_test
-SOURCES = src/motor.c src/laser_math.c src/picture.c src/config.c
+SOURCES = src/motor.c src/grid.c src/picture.c src/config.c
 OBJ_DIR = obj
 
 ifeq ($(DEBUG),1)

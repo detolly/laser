@@ -29,7 +29,7 @@ new_points = [((p.real - min_point_x) / (width if should_scale_y else height) * 
 
 # for testing
 print("#pragma once\n")
-print("#include <laser_math.h>\n")
+print("#include <laser/math.h>\n")
 print("static const point_t points[] = {")
 for p in new_points:
     print(f"    {{ {p[0]:.4f}f, {p[1]:.4f}f }},")

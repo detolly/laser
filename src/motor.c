@@ -1,6 +1,5 @@
-#define _POSIX_C_SOURCE 200809L
-
-#include <motor.h>
+#include <laser/debug.h>
+#include <laser/motor.h>
 
 #include <assert.h>
 #include <pthread.h>
@@ -9,9 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include <config.h>
-#include <debug.h>
-#include <laser_math.h>
+#include <laser/config.h>
+#include <laser/math.h>
 
 #ifdef LASER_DEVICE
 #include <pigpio.h>

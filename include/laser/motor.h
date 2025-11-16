@@ -3,8 +3,7 @@
 #include <stddef.h>
 #include <pthread.h>
 
-#include <laser_math.h>
-#include <picture.h>
+#include <laser/picture.h>
 
 void motor_init();
 

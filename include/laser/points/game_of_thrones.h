@@ -1,6 +1,6 @@
 #pragma once
 
-#include <laser_math.h>
+#include <laser/math.h>
 
 static const point_t points[] = {
     { -0.6761f, -0.2463f },
