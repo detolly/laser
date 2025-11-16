@@ -16,6 +16,7 @@
 #endif
 
 #include <config.h>
+#include <debug.h>
 
 typedef struct {
     size_t index;
@@ -109,7 +110,7 @@ static void find_grid_point_closest_to_projected_point(grid_member_t** x,
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
-    fprintf(stderr, "searching grid took %f us.\n", us);
+    DEBUG("searching grid took %f us.\n", us);
 #endif
 }
 
@@ -207,7 +208,7 @@ void calculate_grid_points(void)
 #ifdef LASER_DEBUG
     for(size_t x = 0; x < grid_length_x; x++) {
         const grid_member_t* member = &grid_members_x[x];
-        fprintf(stderr, "x: %f %f\n", member->coord, member->angle);
+        DEBUG("x: %f %f\n", member->coord, member->angle);
         if (x == 0) continue;
 
         const grid_member_t* member_before = &grid_members_x[x - 1];
@@ -216,7 +217,7 @@ void calculate_grid_points(void)
     }
     for(size_t y = 0; y < grid_length_y; y++) {
         const grid_member_t* member = &grid_members_y[y];
-        fprintf(stderr, "y: %f %f\n", member->coord, member->angle);
+        DEBUG("y: %f %f\n", member->coord, member->angle);
         if (y == 0) continue;
 
         const grid_member_t* member_before = &grid_members_y[y - 1];
@@ -227,7 +228,7 @@ void calculate_grid_points(void)
     uint64_t ns_after = ns_now();
 
     float us = (float)(ns_after - ns_before) / 1000.f;
-    fprintf(stderr, "calculating grid took %f us.\n", us);
+    DEBUG("calculating grid took %f us.\n", us);
 #endif
 }
 

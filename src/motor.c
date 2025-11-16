@@ -10,6 +10,7 @@
 #include <time.h>
 
 #include <config.h>
+#include <debug.h>
 #include <laser_math.h>
 
 #ifdef LASER_DEVICE
@@ -86,9 +87,7 @@ static void run_program_in_thread()
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
     const ll sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
-#ifdef LASER_DEBUG
-    fprintf(stderr, "sleep_time: %llu microseconds\n", sleep_time);
-#endif
+    DEBUG("sleep_time: %llu microseconds\n", sleep_time);
 
     direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
     direction_enum_t previous_direction_pitch = DIRECTION_FORWARD;

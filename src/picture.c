@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include <config.h>
+#include <debug.h>
 #include <laser_math.h>
 
 static void make_instruction_pair_between_points(motor_instruction_pair_t* instruction_pair,
@@ -79,10 +80,8 @@ static void picture_calculate(picture_t* picture)
                    &steps_yaw,
                    &steps_pitch);
 
-#ifdef LASER_DEBUG
-    fprintf(stderr, "symmetrical steps: %d %d\n", steps_yaw, steps_pitch);
-    fprintf(stderr, "total steps %d %d\n", picture->total_yaw, picture->total_pitch);
-#endif
+    DEBUG("symmetrical steps: %d %d\n", steps_yaw, steps_pitch);
+    DEBUG("total steps %d %d\n", picture->total_yaw, picture->total_pitch);
 
     assert(steps_yaw == 0);
     assert(steps_pitch == 0);
