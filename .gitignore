@@ -1,4 +1,3 @@
 *.txt
 !napkin.txt
 target/
-obj/

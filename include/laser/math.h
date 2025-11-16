@@ -25,8 +25,9 @@ typedef struct {
 static inline float project_x(float x,
                               float picture_size)
 {
-    assert(x >= -1.f && x <= 1.f);
     const float projected_x = ((x + 1.f) / 2.f) * picture_size - (picture_size / 2);
+
+    assert(x >= -1.f && x <= 1.f);
     assert(projected_x <= picture_size / 2 && projected_x >= -(picture_size / 2));
 
     return projected_x;
@@ -36,8 +37,9 @@ static inline float project_y(float y,
                               float picture_size,
                               float distance_up)
 {
-    assert(y >= -1.f && y <= 1.f);
     const float projected_y = (((y + 1.f) / 2.f) * picture_size) + distance_up;
+
+    assert(y >= -1.f && y <= 1.f);
     assert(projected_y >= distance_up && projected_y <= distance_up + picture_size);
 
     return projected_y;
@@ -48,11 +50,8 @@ static inline void project_point(point_t* proj,
                                  float picture_size,
                                  float distance_up)
 {
-    const float projected_x = project_x(point_to_project->x, picture_size);
-    const float projected_y = project_y(point_to_project->y, picture_size, distance_up);
-
-    proj->x = projected_x;
-    proj->y = projected_y;
+    proj->x = project_x(point_to_project->x, picture_size);
+    proj->y = project_y(point_to_project->y, picture_size, distance_up);
 }
 
 static inline float project_angle_yaw(const float yaw, const float distance_to_wall)
