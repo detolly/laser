@@ -16,10 +16,10 @@ void grid_make(grid_t* grid,
     const float angle_step_yaw = TWO_PI / (float)steps_per_revolution_yaw;
     const float angle_step_pitch = TWO_PI / (float)steps_per_revolution_pitch;
 
-    const size_t start_y = (size_t)(ideal_pitch_start_angle(distance_up, distance_to_wall) / angle_step_pitch) + 1;
-    const size_t stop_y = (size_t)(ideal_pitch_stop_angle(picture_size + distance_up, distance_to_wall) / angle_step_pitch) + 1;
-    const size_t start_x = (size_t)(ideal_yaw_start_angle() / angle_step_yaw);
-    const size_t stop_x = (size_t)(ideal_yaw_stop_angle(picture_size, distance_to_wall) / angle_step_yaw) + 1;
+    const size_t start_y = 1 + (size_t)(ideal_pitch_angle(distance_up, distance_to_wall) / angle_step_pitch);
+    const size_t stop_y = 1 + (size_t)(ideal_pitch_angle(picture_size + distance_up, distance_to_wall) / angle_step_pitch);
+    const size_t start_x = 0; // (size_t)(ideal_yaw_angle(0, distance_to_wall) / angle_step_yaw);
+    const size_t stop_x = (size_t)(ideal_yaw_angle(picture_size, distance_to_wall) / angle_step_yaw) + 1;
 
     DEBUG("%lu -> %lu | %lu -> %lu\n", start_x, stop_x, start_y, stop_y);
 

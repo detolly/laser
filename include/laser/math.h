@@ -65,25 +65,14 @@ static inline float project_angle_pitch(const float pitch, const float distance_
     return tanf(pitch) * distance_to_wall;
 }
 
-static inline float ideal_pitch_start_angle(float distance_up,
-                                            float distance_to_wall)
+static inline float ideal_pitch_angle(float distance_up,
+                                      float distance_to_wall)
 {
     return atanf(distance_up / distance_to_wall);
 }
 
-static inline float ideal_pitch_stop_angle(float distance_up,
-                                           float distance_to_wall)
-{
-    return atanf(distance_up / distance_to_wall);
-}
-
-static inline float ideal_yaw_start_angle()
-{
-    return 0;
-}
-
-static inline float ideal_yaw_stop_angle(float picture_size,
-                                         float distance_to_wall)
+static inline float ideal_yaw_angle(float picture_size,
+                                    float distance_to_wall)
 {
     return atanf((picture_size / 2.f) / distance_to_wall);
 }
