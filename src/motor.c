@@ -49,7 +49,6 @@ const picture_t* current_picture = NULL;
         clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
     } while(0)
 #else
-    // #define SLEEP(us) gpioSleep(PI_TIME_RELATIVE, 0, us)
     #define SLEEP(us) gpioDelay(us)
 
     #define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
@@ -85,38 +84,38 @@ static void run_program_in_thread()
     const config_t* cfg = config();
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
-    const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
+    const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
     const ll new_sleep_time = maxl(ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, BETWEEN_PULSE_SLEEP_TIME_US);
     DEBUG("sleep_time: %llu microseconds | new_sleep_time: %llu microseconds\n", ideal_sleep_time, new_sleep_time);
 
     direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
     direction_enum_t previous_direction_pitch = DIRECTION_FORWARD;
-
     for(size_t i = 0; i < current_picture->num_points; i++) {
         const motor_instruction_pair_t* instr = &current_picture->instructions[i];
-        DIRECTION_YAW(instr->yaw.direction);
-        DIRECTION_PITCH(instr->pitch.direction);
-
         if (i == 0 || previous_direction_pitch != instr->pitch.direction
                    || previous_direction_yaw != instr->yaw.direction) {
             previous_direction_yaw = instr->yaw.direction;
             previous_direction_pitch = instr->pitch.direction;
+
+            DIRECTION_YAW(instr->yaw.direction);
+            DIRECTION_PITCH(instr->pitch.direction);
             SLEEP(DIRECTION_SLEEP_TIME);
         }
-
         const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
-        for(unsigned i = 0; i < instruction_steps; i++) {
-            if (i < instr->yaw.steps)
+        for(unsigned step = 0; step < instruction_steps; step++) {
+            const char should_pulse_yaw = step < instr->yaw.steps;
+            const char should_pulse_pitch = step < instr->pitch.steps;
+            if (should_pulse_yaw)
                 PULSE_OFF(YAW_PULSE_GPIO);
-            if (i < instr->pitch.steps)
+            if (should_pulse_pitch)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
             SLEEP(BETWEEN_PULSE_SLEEP_TIME_US);
 
-            if (i < instr->yaw.steps)
+            if (should_pulse_yaw)
                 PULSE_ON(YAW_PULSE_GPIO);
-            if (i < instr->pitch.steps)
+            if (should_pulse_pitch)
                 PULSE_ON(PITCH_PULSE_GPIO);
 
             SLEEP(new_sleep_time);
