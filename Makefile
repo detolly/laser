@@ -43,11 +43,6 @@ $(HOST_BIN_DIR) $(DEV_BIN_DIR): | $(OBJ_DIR)/src
 $(OBJ_DIR)/src:
 	mkdir -p $@
 
-# $(HOST_BIN_DIR)/combined: src/combined.c
-# 	$(HOST_CC) $(HOST_CFLAGS) $< $(HOST_LDFLAGS)  -o $@
-# $(DEV_BIN_DIR)/combined: src/combined.c
-# 	$(DEV_CC) $(DEV_LDFLAGS) $(DEV_CFLAGS) $< -o $@
-
 $(HOST_BIN_DIR)/%: $(HOST_OBJ) $(OBJ_DIR)/src/%_host.o | $(OBJ_DIR)/src $(HOST_BIN_DIR)
 	$(HOST_CC) $^ $(HOST_LDFLAGS) -MMD -MP -o $@
 
