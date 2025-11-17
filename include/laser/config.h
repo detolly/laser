@@ -10,7 +10,7 @@
 #define PITCH_DIRECTION_GPIO 26
 #define PITCH_PULSE_GPIO 19
 
-#define DIRECTION_SLEEP_TIME 5
+#define DIRECTION_SLEEP_TIME 15
 #define BETWEEN_PULSE_SLEEP_TIME_US 3 // 200k Hz, 2.5 us per pulse
 
 typedef struct {
