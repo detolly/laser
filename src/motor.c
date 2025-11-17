@@ -70,6 +70,9 @@ void motor_init()
     gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT);
     gpioSetMode(PITCH_DIRECTION_GPIO, PI_OUTPUT);
     gpioSetMode(PITCH_PULSE_GPIO, PI_OUTPUT);
+
+    gpioWrite(PITCH_PULSE_GPIO, 1);
+    gpioWrite(YAW_PULSE_GPIO, 1);
 #endif
 }
 
@@ -84,7 +87,7 @@ static void run_program_in_thread()
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
     const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
 
-    const ll new_sleep_time = maxl((ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US) / 2, BETWEEN_PULSE_SLEEP_TIME_US);
+    const ll new_sleep_time = maxl(ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, BETWEEN_PULSE_SLEEP_TIME_US);
     DEBUG("sleep_time: %llu microseconds | new_sleep_time: %llu microseconds\n", ideal_sleep_time, new_sleep_time);
 
     direction_enum_t previous_direction_yaw = DIRECTION_FORWARD;
@@ -102,22 +105,21 @@ static void run_program_in_thread()
             SLEEP(DIRECTION_SLEEP_TIME);
         }
 
-
-	const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
+        const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned i = 0; i < instruction_steps; i++) {
+            if (i < instr->yaw.steps)
+                PULSE_OFF(YAW_PULSE_GPIO);
+            if (i < instr->pitch.steps)
+                PULSE_OFF(PITCH_PULSE_GPIO);
+
+            SLEEP(BETWEEN_PULSE_SLEEP_TIME_US);
+
             if (i < instr->yaw.steps)
                 PULSE_ON(YAW_PULSE_GPIO);
             if (i < instr->pitch.steps)
                 PULSE_ON(PITCH_PULSE_GPIO);
 
             SLEEP(new_sleep_time);
-
-            if (i < instr->yaw.steps)
-                PULSE_OFF(YAW_PULSE_GPIO);
-            if (i < instr->pitch.steps)
-                PULSE_OFF(PITCH_PULSE_GPIO);
-
-            SLEEP(new_sleep_time + 1);
         }
     }
 }

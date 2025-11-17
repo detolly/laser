@@ -10,8 +10,8 @@
 #define PITCH_DIRECTION_GPIO 26
 #define PITCH_PULSE_GPIO 19
 
-#define DIRECTION_SLEEP_TIME 50
-#define BETWEEN_PULSE_SLEEP_TIME_US 1000000/200000/2 // 200k Hz / 2 pulses
+#define DIRECTION_SLEEP_TIME 5
+#define BETWEEN_PULSE_SLEEP_TIME_US 3 // 200k Hz, 2.5 us per pulse
 
 typedef struct {
     size_t steps_per_revolution_yaw;
