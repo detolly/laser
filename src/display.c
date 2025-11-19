@@ -93,6 +93,10 @@ void display_init()
     display_write_nibble(0b0000);
     display_write_nibble(0b0110);
     DELAY(50);
+
+    display_write_nibble(0b0000);
+    display_write_nibble(0b1100);
+    DELAY(50);
 }
 
 void display_write_string (const char* str, size_t len)
