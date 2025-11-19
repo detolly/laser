@@ -21,7 +21,7 @@
 #define LCD_SET_D7(val)     gpioWrite(LCD_D7, val)
 
 #define LCD_SET_RS(val)     gpioWrite(LCD_REGISTER_SELECT, val)
-#define LCD_SET_ENABLE(val) gpioWrite(LCD_D7, val)
+#define LCD_SET_ENABLE(val) gpioWrite(LCD_ENABLE, val)
 
 #endif
 
@@ -35,10 +35,10 @@ static void display_pulse()
 
 static void display_write_nibble(char data)
 {
-    LCD_SET_D4((data >> 3) & 1);
-    LCD_SET_D5((data >> 2) & 1);
-    LCD_SET_D6((data >> 1) & 1);
-    LCD_SET_D7((data >> 0) & 1);
+    LCD_SET_D4((data >> 0) & 1);
+    LCD_SET_D5((data >> 1) & 1);
+    LCD_SET_D6((data >> 2) & 1);
+    LCD_SET_D7((data >> 3) & 1);
 
     display_pulse();
 }
@@ -48,7 +48,7 @@ static void display_write_byte(char data, char rs)
     LCD_SET_RS(rs & 1);
     display_write_nibble(data >> 4);
     DELAY(1);
-    display_write_nibble(data);
+    display_write_nibble(data & 0b1111);
     DELAY(50);
 }
 
