@@ -73,8 +73,7 @@ static void display_on_off(char display_on, char cursor_on, char cursor_position
 
 static void display_clear()
 {
-    display_write_nibble(0b0000);
-    display_write_nibble(0b0001);
+    display_cmd((char)0b00000001);
     DELAY(2000);
 }
 
