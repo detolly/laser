@@ -1,6 +1,8 @@
 #include <laser/debug.h>
 #include <laser/display.h>
 
+#include <assert.h>
+
 #include <laser/gpio.h>
 
 #ifndef LASER_DEVICE
@@ -15,13 +17,13 @@
 
 #else
 
-#define LCD_SET_D4(val)     gpioWrite(LCD_D4, val)
-#define LCD_SET_D5(val)     gpioWrite(LCD_D5, val)
-#define LCD_SET_D6(val)     gpioWrite(LCD_D6, val)
-#define LCD_SET_D7(val)     gpioWrite(LCD_D7, val)
+#define LCD_SET_D4(val)     assert(gpioWrite(LCD_D4, val) == 0)
+#define LCD_SET_D5(val)     assert(gpioWrite(LCD_D5, val) == 0)
+#define LCD_SET_D6(val)     assert(gpioWrite(LCD_D6, val) == 0)
+#define LCD_SET_D7(val)     assert(gpioWrite(LCD_D7, val) == 0)
 
-#define LCD_SET_RS(val)     gpioWrite(LCD_REGISTER_SELECT, val)
-#define LCD_SET_ENABLE(val) gpioWrite(LCD_ENABLE, val)
+#define LCD_SET_RS(val)     assert(gpioWrite(LCD_REGISTER_SELECT, val) == 0)
+#define LCD_SET_ENABLE(val) assert(gpioWrite(LCD_ENABLE, val) == 0)
 
 #endif
 
@@ -30,7 +32,7 @@ static void display_pulse()
     LCD_SET_ENABLE(1);
     DELAY(2);
     LCD_SET_ENABLE(0);
-    DELAY(2);
+    DELAY(50);
 }
 
 static void display_write_nibble(char data)
@@ -47,9 +49,7 @@ static void display_write_byte(char data, char rs)
 {
     LCD_SET_RS(rs & 1);
     display_write_nibble(data >> 4);
-    DELAY(1);
     display_write_nibble(data & 0b1111);
-    DELAY(50);
 }
 
 static void display_cmd(char cmd)  { display_write_byte(cmd, 0); }
@@ -67,7 +67,7 @@ void display_init()
     DELAY(200);
     display_write_nibble(0b0011);
 
-    display_write_nibble(0b0010);
+    display_write_nibble(0b0010); // enter 4 bit
 
     display_write_nibble(0b0010);
     display_write_nibble(0b1000);
@@ -78,6 +78,7 @@ void display_init()
     display_write_nibble(0b0000);
 
     display_cmd(0b00000001);
+    display_cmd(0b00001000);
 }
 
 void display_write_string (const char* str, size_t len)

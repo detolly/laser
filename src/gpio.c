@@ -10,20 +10,20 @@ void gpio_init()
     DEBUG("rc = %d\n", rc);
     assert(rc >= 0);
 
-    gpioSetMode(YAW_DIRECTION_GPIO, PI_OUTPUT);
-    gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT);
-    gpioSetMode(PITCH_DIRECTION_GPIO, PI_OUTPUT);
-    gpioSetMode(PITCH_PULSE_GPIO, PI_OUTPUT);
+    assert(gpioSetMode(YAW_DIRECTION_GPIO, PI_OUTPUT) == 0);
+    assert(gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT) == 0);
+    assert(gpioSetMode(PITCH_DIRECTION_GPIO, PI_OUTPUT) == 0);
+    assert(gpioSetMode(PITCH_PULSE_GPIO, PI_OUTPUT) == 0);
 
-    gpioWrite(PITCH_PULSE_GPIO, 1);
-    gpioWrite(YAW_PULSE_GPIO, 1);
+    assert(gpioWrite(PITCH_PULSE_GPIO, 1) == 0);
+    assert(gpioWrite(YAW_PULSE_GPIO, 1) == 0);
 
-    gpioSetMode(LCD_REGISTER_SELECT, PI_OUTPUT);
-    gpioSetMode(LCD_ENABLE, PI_OUTPUT);
-    gpioSetMode(LCD_D4, PI_OUTPUT);
-    gpioSetMode(LCD_D5, PI_OUTPUT);
-    gpioSetMode(LCD_D6, PI_OUTPUT);
-    gpioSetMode(LCD_D7, PI_OUTPUT);
+    assert(gpioSetMode(LCD_REGISTER_SELECT, PI_OUTPUT) == 0);
+    assert(gpioSetMode(LCD_ENABLE, PI_OUTPUT) == 0);
+    assert(gpioSetMode(LCD_D4, PI_OUTPUT) == 0);
+    assert(gpioSetMode(LCD_D5, PI_OUTPUT) == 0);
+    assert(gpioSetMode(LCD_D6, PI_OUTPUT) == 0);
+    assert(gpioSetMode(LCD_D7, PI_OUTPUT) == 0);
 #endif
 }
 
