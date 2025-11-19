@@ -30,9 +30,9 @@
 static void display_pulse()
 {
     LCD_SET_ENABLE(1);
-    DELAY(2);
+    DELAY(5);
     LCD_SET_ENABLE(0);
-    DELAY(50);
+    DELAY(100);
 }
 
 static void display_write_nibble(char data)
@@ -43,6 +43,11 @@ static void display_write_nibble(char data)
     LCD_SET_D7((data >> 3) & 1);
 
     display_pulse();
+
+    LCD_SET_D4(0);
+    LCD_SET_D5(0);
+    LCD_SET_D6(0);
+    LCD_SET_D7(0);
 }
 
 static void display_write_byte(char data, char rs)
@@ -66,19 +71,27 @@ void display_init()
     display_write_nibble(0b0011);
     DELAY(200);
     display_write_nibble(0b0011);
+    DELAY(200);
+    display_write_nibble(0b0011);
+    DELAY(200);
 
-    display_write_nibble(0b0010); // enter 4 bit
+    // we are now in 4 bit mode!
 
     display_write_nibble(0b0010);
     display_write_nibble(0b1000);
+    DELAY(50);
+
+    display_write_nibble(0b0000);
+    display_write_nibble(0b1000);
+    DELAY(50);
 
     display_write_nibble(0b0000);
     display_write_nibble(0b0001);
+    DELAY(2000);
 
     display_write_nibble(0b0000);
-
-    display_cmd(0b00000001);
-    display_cmd(0b00001000);
+    display_write_nibble(0b0110);
+    DELAY(50);
 }
 
 void display_write_string (const char* str, size_t len)
