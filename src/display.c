@@ -17,13 +17,13 @@
 
 #else
 
-#define LCD_SET_D4(val)     assert(gpioWrite(LCD_D4, val) == 0)
-#define LCD_SET_D5(val)     assert(gpioWrite(LCD_D5, val) == 0)
-#define LCD_SET_D6(val)     assert(gpioWrite(LCD_D6, val) == 0)
-#define LCD_SET_D7(val)     assert(gpioWrite(LCD_D7, val) == 0)
+#define LCD_SET_D4(val)     assert(gpioWrite(LCD_D4, val & 1) == 0)
+#define LCD_SET_D5(val)     assert(gpioWrite(LCD_D5, val & 1) == 0)
+#define LCD_SET_D6(val)     assert(gpioWrite(LCD_D6, val & 1) == 0)
+#define LCD_SET_D7(val)     assert(gpioWrite(LCD_D7, val & 1) == 0)
 
-#define LCD_SET_RS(val)     assert(gpioWrite(LCD_REGISTER_SELECT, val) == 0)
-#define LCD_SET_ENABLE(val) assert(gpioWrite(LCD_ENABLE, val) == 0)
+#define LCD_SET_RS(val)     assert(gpioWrite(LCD_REGISTER_SELECT, val & 1) == 0)
+#define LCD_SET_ENABLE(val) assert(gpioWrite(LCD_ENABLE, val & 1) == 0)
 
 #endif
 
@@ -53,8 +53,11 @@ static void display_write_nibble(char data)
 static void display_write_byte(char data, char rs)
 {
     LCD_SET_RS(rs & 1);
+
     display_write_nibble(data >> 4);
     display_write_nibble(data & 0b1111);
+
+    LCD_SET_RS(0);
 }
 
 static void display_cmd(char cmd)  { display_write_byte(cmd, 0); }
