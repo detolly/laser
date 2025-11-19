@@ -63,6 +63,21 @@ static void display_write_byte(char data, char rs)
 static void display_cmd(char cmd)  { display_write_byte(cmd, 0); }
 static void display_data(char c)   { display_write_byte(c, 1);  }
 
+static void display_on_off(char display_on, char cursor_on, char cursor_position_on)
+{
+    display_cmd((char)(0b00001000 | ((display_on & 1) << 2)
+                                  | ((cursor_on & 1) << 1)
+                                  | (cursor_position_on & 1)));
+    DELAY(50);
+}
+
+static void display_clear()
+{
+    display_write_nibble(0b0000);
+    display_write_nibble(0b0001);
+    DELAY(2000);
+}
+
 void display_init()
 {
     LCD_SET_RS(0);
@@ -76,39 +91,32 @@ void display_init()
     display_write_nibble(0b0011);
     DELAY(50);
 
+    // function set
     display_write_nibble(0b0010);
     DELAY(50);
 
     // we are now in 4 bit mode!
 
+    // function set
     display_write_nibble(0b0010);
     display_write_nibble(0b1000);
     DELAY(50);
 
-    display_write_nibble(0b0000);
-    display_write_nibble(0b1000);
-    DELAY(50);
+    display_on_off(0, 0, 0);
+    display_clear();
 
-    display_write_nibble(0b0000);
-    display_write_nibble(0b0001);
-    DELAY(2000);
-
+    // entry mode set
     display_write_nibble(0b0000);
     display_write_nibble(0b0110);
-    DELAY(2000);
-
-    display_write_nibble(0b0000);
-    display_write_nibble(0b1100);
     DELAY(50);
-}
 
-void clear_display()
-{
-
+    display_on_off(1, 0, 0);
 }
 
 void display_write_string (const char* str, size_t len)
 {
+    display_clear();
+
     for(size_t i = 0; i < len; i++) {
         display_data(str[i]);
         DELAY(50);
