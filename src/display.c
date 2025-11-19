@@ -60,8 +60,22 @@ static void display_write_byte(char data, char rs)
     LCD_SET_RS(0);
 }
 
-static void display_cmd(char cmd)  { display_write_byte(cmd, 0); }
-static void display_data(char c)   { display_write_byte(c, 1);  }
+static void display_cmd(char cmd)
+{
+    display_write_byte(cmd, 0);
+}
+
+static void display_set_ddram_address(char addr)
+{
+    display_cmd(0b10000000 | (addr & 0b01111111));
+    DELAY(50);
+}
+
+static void display_write_to_ddram(char c)
+{
+    display_write_byte(c, 1);
+    DELAY(50);
+}
 
 static void display_on_off(char display_on, char cursor_on, char cursor_position_on)
 {
@@ -112,12 +126,20 @@ void display_init()
     display_on_off(1, 0, 0);
 }
 
-void display_write_string (const char* str, size_t len)
+void display_write_string (const char* top, size_t top_len,
+                           const char* bottom, size_t bottom_len)
 {
     display_clear();
 
-    for(size_t i = 0; i < len; i++) {
-        display_data(str[i]);
-        DELAY(50);
+    if (top != NULL) {
+        display_set_ddram_address(0x0);
+        for(size_t i = 0; i < top_len; i++)
+            display_write_to_ddram(top[i]);
+    }
+
+    if (bottom != NULL) {
+        display_set_ddram_address(0x40);
+        for(size_t i = 0; i < bottom_len; i++)
+            display_write_to_ddram(bottom[i]);
     }
 }
