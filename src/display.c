@@ -74,7 +74,10 @@ void display_init()
     display_write_nibble(0b0011);
     DELAY(200);
     display_write_nibble(0b0011);
-    DELAY(200);
+    DELAY(50);
+
+    display_write_nibble(0b0010);
+    DELAY(50);
 
     // we are now in 4 bit mode!
 
@@ -92,11 +95,16 @@ void display_init()
 
     display_write_nibble(0b0000);
     display_write_nibble(0b0110);
-    DELAY(50);
+    DELAY(2000);
 
     display_write_nibble(0b0000);
     display_write_nibble(0b1100);
     DELAY(50);
+}
+
+void clear_display()
+{
+
 }
 
 void display_write_string (const char* str, size_t len)
