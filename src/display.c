@@ -28,9 +28,9 @@
 static void display_pulse()
 {
     LCD_SET_ENABLE(1);
-    DELAY(1);
+    DELAY(2);
     LCD_SET_ENABLE(0);
-    DELAY(50);
+    DELAY(2);
 }
 
 static void display_write_nibble(char data)
@@ -57,19 +57,27 @@ static void display_data(char c)   { display_write_byte(c, 1);  }
 
 void display_init()
 {
-    DELAY(50);
     LCD_SET_RS(0);
     LCD_SET_ENABLE(0);
-    display_write_nibble(0x30); DELAY(5000);
-    display_write_nibble(0x30); DELAY(200);
-    display_write_nibble(0x30); DELAY(200);
-    display_write_nibble(0x20); DELAY(200);
-    display_cmd(0x28);
-    display_cmd(0x08);
-    display_cmd(0x01);
-    DELAY(2000);
-    display_cmd(0x06);
-    display_cmd(0x0C);
+
+    display_write_nibble(0b0011);
+    DELAY(5000); // function set
+    
+    display_write_nibble(0b0011);
+    DELAY(200);
+    display_write_nibble(0b0011);
+
+    display_write_nibble(0b0010);
+
+    display_write_nibble(0b0010);
+    display_write_nibble(0b1000);
+
+    display_write_nibble(0b0000);
+    display_write_nibble(0b0001);
+
+    display_write_nibble(0b0000);
+
+    display_cmd(0b00000001);
 }
 
 void display_write_string (const char* str, size_t len)
