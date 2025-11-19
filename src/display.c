@@ -75,8 +75,6 @@ void display_init()
     DELAY(200);
     display_write_nibble(0b0011);
     DELAY(200);
-    display_write_nibble(0b0011);
-    DELAY(200);
 
     // we are now in 4 bit mode!
 
