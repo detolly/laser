@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <laser/gpio.h>
 #include <laser/config.h>
 #include <laser/math.h>
 
@@ -23,6 +24,28 @@ pthread_t g_current_motor_thread = 0;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
+#define MICROSECONDS_IN_A_SECOND 1000000
+#define DIRECTION_SLEEP_TIME_US 45
+#define BETWEEN_PULSE_SLEEP_TIME_US 3 // 200k Hz, 2.5 us per pulse
+
+#ifndef LASER_DEVICE
+
+#define DIRECTION_YAW(d) do {} while (0)
+#define DIRECTION_PITCH(d) do {} while (0)
+
+#define PULSE_ON(gpio) do {} while (0)
+#define PULSE_OFF(gpio) do {} while (0)
+
+#else
+
+#define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
+#define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
+
+#define PULSE_ON(gpio) gpioWrite(gpio, 1);
+#define PULSE_OFF(gpio) gpioWrite(gpio, 0);
+
+#endif
+
 #define WAIT() do {                                 \
     pthread_mutex_lock(&mutex);                     \
     pthread_cond_wait(&cond, &mutex);               \
@@ -37,44 +60,6 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 const picture_t* current_picture = NULL;
 
-#ifndef LASER_DEVICE
-    #define DIRECTION_YAW(d) do {} while (0)
-    #define DIRECTION_PITCH(d) do {} while (0)
-
-    #define PULSE_ON(gpio) do {} while (0)
-    #define PULSE_OFF(gpio) do {} while (0)
-
-    #define SLEEP(us) do {                                              \
-        struct timespec t = { .tv_sec = 0, .tv_nsec = us * 1000 };      \
-        clock_nanosleep(CLOCK_MONOTONIC, 0, &t, NULL);                  \
-    } while(0)
-#else
-    #define SLEEP(us) gpioDelay(us)
-
-    #define DIRECTION_YAW(d) gpioWrite(YAW_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
-    #define DIRECTION_PITCH(d) gpioWrite(PITCH_DIRECTION_GPIO, d == DIRECTION_FORWARD ? 1 : 0)
-
-    #define PULSE_ON(gpio) gpioWrite(gpio, 1);
-    #define PULSE_OFF(gpio) gpioWrite(gpio, 0);
-#endif
-
-void motor_init()
-{
-#ifdef LASER_DEVICE
-    int rc = gpioInitialise();
-    fprintf(stderr, "rc = %d\n", rc);
-    assert(rc >= 0);
-
-    gpioSetMode(YAW_DIRECTION_GPIO, PI_OUTPUT);
-    gpioSetMode(YAW_PULSE_GPIO, PI_OUTPUT);
-    gpioSetMode(PITCH_DIRECTION_GPIO, PI_OUTPUT);
-    gpioSetMode(PITCH_PULSE_GPIO, PI_OUTPUT);
-
-    gpioWrite(PITCH_PULSE_GPIO, 1);
-    gpioWrite(YAW_PULSE_GPIO, 1);
-#endif
-}
-
 typedef long long ll;
 static size_t max(size_t a, size_t b) { return a > b ? a : b; }
 static long maxl(long a, long b) { return a > b ? a : b; }
@@ -85,7 +70,7 @@ static void run_program_in_thread()
     const ll rpm = (ll)cfg->motor_speed;
     const ll steps = (ll)max(cfg->steps_per_revolution_yaw, cfg->steps_per_revolution_pitch);
 
-    const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_PER_SECOND) / (rpm * steps) + 1;
+    const ll ideal_sleep_time = (ll)(60 * MICROSECONDS_IN_A_SECOND) / (rpm * steps) + 1;
     const ll new_sleep_time = maxl(ideal_sleep_time - BETWEEN_PULSE_SLEEP_TIME_US, BETWEEN_PULSE_SLEEP_TIME_US);
     DEBUG("sleep_time: %llu microseconds | new_sleep_time: %llu microseconds\n", ideal_sleep_time, new_sleep_time);
 
@@ -100,7 +85,7 @@ static void run_program_in_thread()
 
             DIRECTION_YAW(instr->yaw.direction);
             DIRECTION_PITCH(instr->pitch.direction);
-            SLEEP(DIRECTION_SLEEP_TIME);
+            DELAY(DIRECTION_SLEEP_TIME_US);
         }
         const size_t instruction_steps = max(instr->yaw.steps, instr->pitch.steps);
         for(unsigned step = 0; step < instruction_steps; step++) {
@@ -111,14 +96,14 @@ static void run_program_in_thread()
             if (should_pulse_pitch)
                 PULSE_OFF(PITCH_PULSE_GPIO);
 
-            SLEEP(BETWEEN_PULSE_SLEEP_TIME_US);
+            DELAY(BETWEEN_PULSE_SLEEP_TIME_US);
 
             if (should_pulse_yaw)
                 PULSE_ON(YAW_PULSE_GPIO);
             if (should_pulse_pitch)
                 PULSE_ON(PITCH_PULSE_GPIO);
 
-            SLEEP(new_sleep_time);
+            DELAY(new_sleep_time);
         }
     }
 }
@@ -191,13 +176,6 @@ void stop_motor()
     pthread_cond_wait(&cond, &mutex);
     pthread_mutex_unlock(&mutex);
     fputs("motor shut down\n", stderr);
-}
-
-void motor_free()
-{
-#ifdef LASER_DEVICE
-    gpioTerminate();
-#endif
 }
 
 char motor_is_running()

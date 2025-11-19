@@ -2,6 +2,7 @@
 #include <unistd.h>
 
 #include <laser/config.h>
+#include <laser/gpio.h>
 #include <laser/math.h>
 #include <laser/motor.h>
 #include <laser/picture.h>
@@ -25,7 +26,7 @@ int main(int argc, const char* argv[])
     }
 #endif
 
-    motor_init();
+    gpio_init();
     start_motor_thread();
 
     picture_t* picture = managed_picture_from_points(points, NUM_POINTS);
@@ -36,5 +37,5 @@ int main(int argc, const char* argv[])
     stop_motor_thread();
 
     free_managed_pictures();
-    motor_free();
+    gpio_terminate();
 }

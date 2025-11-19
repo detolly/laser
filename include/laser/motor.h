@@ -5,8 +5,6 @@
 
 #include <laser/picture.h>
 
-void motor_init();
-
 void start_motor();
 void stop_motor();
 
@@ -19,4 +17,3 @@ void set_picture(const picture_t* picture);
 
 pthread_t current_motor_thread();
 
-void motor_free();
