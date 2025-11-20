@@ -1,4 +1,5 @@
 
+#include <assert.h>
 #include <laser/gpio.h>
 #include <laser/picture.h>
 
@@ -106,9 +107,15 @@ int main(int argc, const char* argv[])
     gpioSetMode(MOTOR_GPIO_2, PI_OUTPUT);
     gpioSetMode(MOTOR_GPIO_3, PI_OUTPUT);
 
-    for(int i = 0; i < 64; i++) {
+    #define STEPS_PER_REV (32)
+    #define GEAR_RATIO (63.684f)
+
+    #define ONE_REV_STEPS ((int)(STEPS_PER_REV * GEAR_RATIO) + 1)
+    assert(ONE_REV_STEPS % 2 == 0);
+
+    for(int i = 0; i < ONE_REV_STEPS; i++) {
         step();
-        DELAY(1000000/64);
+        DELAY(500);
     }
 
     switch_off();
