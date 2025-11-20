@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stddef.h>
 #include <pthread.h>
 
 #include <laser/picture.h>
