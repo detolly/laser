@@ -1,5 +1,5 @@
 CFLAGS += -Wall -Wextra -std=c99 -Iinclude
-BINARIES = motor_test projection_test display_test
+BINARIES = motor_test projection_test display_test motor2_test
 SOURCES = src/motor.c src/grid.c src/picture.c src/config.c src/gpio.c src/display.c
 OBJ_DIR = target/obj
 
