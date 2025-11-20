@@ -15,6 +15,17 @@
 #define LCD_SET_RS(val)     do { } while (0)
 #define LCD_SET_ENABLE(val) do { } while (0)
 
+static void display_write_nibble(char data)
+{
+    (void)data;
+}
+
+static void display_write_byte(char data, char rs)
+{
+    (void)data;
+    (void)rs;
+}
+
 #else
 
 #define LCD_SET_D4(val)     assert(gpioWrite(LCD_D4, val & 1) == 0)
@@ -24,8 +35,6 @@
 
 #define LCD_SET_RS(val)     assert(gpioWrite(LCD_REGISTER_SELECT, val & 1) == 0)
 #define LCD_SET_ENABLE(val) assert(gpioWrite(LCD_ENABLE, val & 1) == 0)
-
-#endif
 
 static void display_pulse()
 {
@@ -59,6 +68,10 @@ static void display_write_byte(char data, char rs)
 
     LCD_SET_RS(0);
 }
+
+#endif
+
+
 
 static void display_cmd(char cmd)
 {
@@ -98,7 +111,7 @@ void display_init()
 
     display_write_nibble(0b0011);
     DELAY(5000); // function set
-    
+
     display_write_nibble(0b0011);
     DELAY(200);
     display_write_nibble(0b0011);
