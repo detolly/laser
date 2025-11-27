@@ -448,7 +448,9 @@
   },
   "libraries": {
     "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "my_library"
+    ]
   },
   "meta": {
     "filename": "motor.kicad_pro",
@@ -633,7 +635,7 @@
         "version": 0
       },
       "model_mode": 4,
-      "workbook_filename": ""
+      "workbook_filename": "simulation.wbk"
     },
     "page_layout_descr_file": "",
     "plot_directory": "",
@@ -651,6 +653,14 @@
     [
       "833cc0fc-e321-4f55-9543-54c4634b471c",
       "Root"
+    ],
+    [
+      "51bcc39e-e0c9-4750-b272-0e07365dd3ab",
+      "H-Bridge 1"
+    ],
+    [
+      "1dca6dba-f584-4c05-8cae-1ca72885a72e",
+      "H-Bridge 2"
     ]
   ],
   "text_variables": {}
