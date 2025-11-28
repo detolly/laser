@@ -2,36 +2,6 @@
   "last_sch_text_sim_command": "",
   "tabs": [
     {
-      "analysis": "DC",
-      "commands": [
-        ".dc V1 3 12 100m",
-        ".kicad adjustpaths",
-        ".save all",
-        ".probe alli",
-        ".probe allp"
-      ],
-      "dottedSecondary": true,
-      "margins": {
-        "bottom": 45,
-        "left": 70,
-        "right": 70,
-        "top": 30
-      },
-      "measurements": [],
-      "showGrid": true,
-      "traces": []
-    },
-    {
-      "analysis": "OP",
-      "commands": [
-        ".op",
-        ".kicad adjustpaths",
-        ".save all",
-        ".probe alli",
-        ".probe allp"
-      ]
-    },
-    {
       "analysis": "TRAN",
       "commands": [
         ".tran 10u 5m",
@@ -42,28 +12,38 @@
       ],
       "dottedSecondary": false,
       "legend": {
-        "x": 108,
-        "y": 135
+        "x": 484,
+        "y": 607
       },
       "margins": {
         "bottom": 45,
         "left": 70,
-        "right": 160,
+        "right": 70,
         "top": 30
       },
       "measurements": [],
       "showGrid": false,
       "traces": [
         {
-          "color": "rgb(55, 126, 184)",
-          "signal": "I(R13)",
+          "color": "rgb(255, 255, 51)",
+          "signal": "I(L1)",
           "trace_type": 258
         },
         {
-          "color": "rgb(77, 175, 74)",
-          "signal": "I(R14)",
+          "color": "rgb(166, 86, 40)",
+          "signal": "I(L2)",
           "trace_type": 258
         }
+      ]
+    },
+    {
+      "analysis": "OP",
+      "commands": [
+        ".op",
+        ".kicad adjustpaths",
+        ".save all",
+        ".probe alli",
+        ".probe allp"
       ]
     }
   ],

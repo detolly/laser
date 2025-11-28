@@ -1241,7 +1241,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=0 tr=0 tf=0 tw=250us per=500us"
+		(property "Sim.Params" "y1=0 y2=3.3 td=2us tr=0 tf=0 tw=246us per=500us"
 			(at 87.884 128.524 0)
 			(effects
 				(font
@@ -1283,7 +1283,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DISABLE1"
+		(property "Value" "V_ENABLE1"
 			(at 28.956 68.072 0)
 			(effects
 				(font
@@ -1518,7 +1518,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=0 tf=0 tw=250us per=500us"
+		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=0 tf=0 tw=246us per=500us"
 			(at 87.63 125.73 0)
 			(effects
 				(font
@@ -2063,7 +2063,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DISABLE2"
+		(property "Value" "V_ENABLE2"
 			(at 104.14 77.47 0)
 			(effects
 				(font
@@ -2463,7 +2463,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DISABLE2"
+		(property "Value" "V_ENABLE2"
 			(at 54.356 68.072 0)
 			(effects
 				(font
@@ -2731,7 +2731,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DISABLE1"
+		(property "Value" "V_ENABLE1"
 			(at 88.9 77.47 0)
 			(effects
 				(font
@@ -2973,7 +2973,7 @@
 				(justify left top)
 			)
 		)
-		(pin "VDD" output
+		(pin "VDD" input
 			(at 62.23 33.02 90)
 			(uuid "d2fd8066-a667-4bfe-ba42-c5e2a595827d")
 			(effects
@@ -2983,7 +2983,7 @@
 				(justify right)
 			)
 		)
-		(pin "DIR" output
+		(pin "DIR" input
 			(at 50.8 55.88 270)
 			(uuid "a5b76b31-0c72-41da-81ee-07f61dcc3670")
 			(effects
@@ -2993,7 +2993,7 @@
 				(justify left)
 			)
 		)
-		(pin "PWR+" output
+		(pin "PWR+" bidirectional
 			(at 54.61 33.02 90)
 			(uuid "59a9fffb-32d6-4f2f-9e28-1fa15952a4e5")
 			(effects
@@ -3003,7 +3003,7 @@
 				(justify right)
 			)
 		)
-		(pin "PWR-" output
+		(pin "PWR-" bidirectional
 			(at 50.8 33.02 90)
 			(uuid "cc166799-2604-4138-811a-8f0ea3de880e")
 			(effects
@@ -3013,7 +3013,7 @@
 				(justify right)
 			)
 		)
-		(pin "DISABLE" output
+		(pin "ENABLE" input
 			(at 54.61 55.88 270)
 			(uuid "51a2de6d-61bb-4287-b8a5-d87e38c04155")
 			(effects
@@ -3064,7 +3064,7 @@
 				(justify left top)
 			)
 		)
-		(pin "VDD" output
+		(pin "VDD" input
 			(at 36.83 33.02 90)
 			(uuid "fc4bad4d-045f-4ec2-a734-1e72fbc451ac")
 			(effects
@@ -3074,7 +3074,7 @@
 				(justify right)
 			)
 		)
-		(pin "DIR" output
+		(pin "DIR" input
 			(at 25.4 55.88 270)
 			(uuid "e1456b42-8b9a-4b14-8a45-f44c6c142922")
 			(effects
@@ -3084,7 +3084,7 @@
 				(justify left)
 			)
 		)
-		(pin "PWR+" output
+		(pin "PWR+" bidirectional
 			(at 29.21 33.02 90)
 			(uuid "a0f23823-96b0-400c-a644-6fe0a322712f")
 			(effects
@@ -3094,7 +3094,7 @@
 				(justify right)
 			)
 		)
-		(pin "PWR-" output
+		(pin "PWR-" bidirectional
 			(at 25.4 33.02 90)
 			(uuid "69b28fe4-43bb-416a-a0c5-f78a0f0a2c82")
 			(effects
@@ -3104,7 +3104,7 @@
 				(justify right)
 			)
 		)
-		(pin "DISABLE" output
+		(pin "ENABLE" input
 			(at 29.21 55.88 270)
 			(uuid "1d5fe78f-cc4d-4efe-a646-9ae51d78eb7f")
 			(effects
