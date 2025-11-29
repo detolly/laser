@@ -1168,7 +1168,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "00e1ceb5-b51e-42c8-89f1-801026f94f0f")
-		(property "Reference" "V4"
+		(property "Reference" "V3"
 			(at 92.71 84.9601 0)
 			(effects
 				(font
@@ -1241,7 +1241,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=2us tr=0 tf=0 tw=246us per=500us"
+		(property "Sim.Params" "y1=0 y2=3.3 td=0us tr=0us tf=0us tw=250us per=500us"
 			(at 87.884 128.524 0)
 			(effects
 				(font
@@ -1259,7 +1259,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "V4")
+					(reference "V3")
 					(unit 1)
 				)
 			)
@@ -1274,7 +1274,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0513a322-b88b-4b2f-a212-644f96f99118")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR02"
 			(at 29.21 59.69 0)
 			(effects
 				(font
@@ -1324,7 +1324,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR026")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -1518,7 +1518,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=0 tf=0 tw=246us per=500us"
+		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=0us tf=0us tw=250us per=500us"
 			(at 87.63 125.73 0)
 			(effects
 				(font
@@ -1552,7 +1552,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "40c0db56-3b91-4bc3-8249-66e25ee81d7e")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR06"
 			(at 73.66 26.67 0)
 			(effects
 				(font
@@ -1602,7 +1602,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR013")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -1618,7 +1618,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "41151d5f-21f7-49d8-be27-eed565ff2d2a")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR07"
 			(at 73.66 63.5 0)
 			(effects
 				(font
@@ -1668,7 +1668,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR02")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -1684,7 +1684,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "41512e80-7619-46eb-9635-975d91cd371b")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR09"
 			(at 88.9 63.5 0)
 			(effects
 				(font
@@ -1734,7 +1734,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR015")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -1749,7 +1749,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "64083784-2dc8-4998-b628-cc191be3b32f")
-		(property "Reference" "V3"
+		(property "Reference" "V4"
 			(at 107.95 25.2701 0)
 			(effects
 				(font
@@ -1840,7 +1840,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "V3")
+					(reference "V4")
 					(unit 1)
 				)
 			)
@@ -1855,7 +1855,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "763aad50-a7d1-43e5-a0ea-25c464056afe")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR01"
 			(at 25.4 52.07 0)
 			(effects
 				(font
@@ -1905,7 +1905,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR030")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -1920,7 +1920,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8006c787-36b9-480e-91a3-ad981edb7c94")
-		(property "Reference" "R14"
+		(property "Reference" "R1"
 			(at 23.114 28.956 90)
 			(effects
 				(font
@@ -1972,7 +1972,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "R14")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -1988,7 +1988,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "82222b4a-7fe6-4a84-b316-305eba55f720")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR08"
 			(at 88.9 26.67 0)
 			(effects
 				(font
@@ -2038,7 +2038,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR07")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -2054,7 +2054,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "93da1da7-255d-4c97-ac01-4fac41292ffa")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR014"
 			(at 104.14 86.36 0)
 			(effects
 				(font
@@ -2104,7 +2104,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR019")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -2120,7 +2120,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9422a790-7c76-417b-8b4b-a81ff89a822c")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR015"
 			(at 104.14 123.19 0)
 			(effects
 				(font
@@ -2170,7 +2170,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR021")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -2186,7 +2186,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9f8e76c8-c7de-4cce-9a27-da243626742d")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR013"
 			(at 104.14 63.5 0)
 			(effects
 				(font
@@ -2236,7 +2236,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR024")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -2252,7 +2252,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a054163f-d06b-4d3e-93bf-db4f3c6d33fd")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR011"
 			(at 88.9 123.19 0)
 			(effects
 				(font
@@ -2302,7 +2302,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR017")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -2317,7 +2317,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ab8ee496-3938-4bc5-9d63-e021088edfd1")
-		(property "Reference" "R13"
+		(property "Reference" "R2"
 			(at 48.514 29.464 90)
 			(effects
 				(font
@@ -2369,7 +2369,7 @@
 		(instances
 			(project ""
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "R13")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -2454,7 +2454,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c4d8d142-ce78-4a02-bc28-bb0f36dfe03d")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR05"
 			(at 54.61 59.69 0)
 			(effects
 				(font
@@ -2504,7 +2504,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR027")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -2520,7 +2520,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc17e855-01dd-4dca-941d-7515089c3190")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR03"
 			(at 36.83 25.4 0)
 			(effects
 				(font
@@ -2570,7 +2570,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR029")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -2586,7 +2586,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d20640d7-3086-458b-b0df-4caa785cb43e")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR012"
 			(at 104.14 26.67 0)
 			(effects
 				(font
@@ -2636,7 +2636,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR023")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -2722,7 +2722,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dafb6a2a-309f-431f-85a5-7f69884fc081")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR010"
 			(at 88.9 86.36 0)
 			(effects
 				(font
@@ -2772,7 +2772,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR016")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -2884,7 +2884,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ff24fb64-2d96-424a-9888-873676ecebee")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR04"
 			(at 50.8 52.07 0)
 			(effects
 				(font
@@ -2934,7 +2934,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR012")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
