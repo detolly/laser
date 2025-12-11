@@ -291,209 +291,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Simulation_SPICE:VDC"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.0254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "V"
-				(at 2.54 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "1"
-				(at 2.54 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Voltage source, DC"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pins" "1=+ 2=-"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Type" "DC"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Device" "V"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "simulation"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VDC_0_0"
-				(polyline
-					(pts
-						(xy -1.27 0.254) (xy 1.27 0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.762 -0.254) (xy -1.27 -0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.254 -0.254) (xy -0.254 -0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -0.254) (xy 0.762 -0.254)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(text "+"
-					(at 0 1.905 0)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(symbol "VDC_0_1"
-				(circle
-					(center 0 0)
-					(radius 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "VDC_1_1"
-				(pin passive line
-					(at 0 5.08 270)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Simulation_SPICE:VPULSE"
 			(pin_numbers
 				(hide yes)
@@ -1031,16 +828,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 57.15) (xy 73.66 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a9432a5-a98f-4b78-9d8b-ff1747c6ce03")
-	)
-	(wire
-		(pts
 			(xy 54.61 25.4) (xy 50.8 25.4)
 		)
 		(stroke
@@ -1058,16 +845,6 @@
 			(type default)
 		)
 		(uuid "3f1723b5-ec67-478c-b98d-55a2a1b36f08")
-	)
-	(wire
-		(pts
-			(xy 104.14 92.71) (xy 104.14 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c16ee25-0cc8-47bd-b8af-64f7481e8a46")
 	)
 	(wire
 		(pts
@@ -1091,23 +868,23 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 55.88) (xy 29.21 63.5)
+			(xy 31.75 55.88) (xy 31.75 66.04)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8412d9e5-0a8e-4cbd-a21f-ed8142f2d571")
+		(uuid "97541583-2ebb-4a5e-b699-f5936e9977d0")
 	)
 	(wire
 		(pts
-			(xy 88.9 57.15) (xy 88.9 33.02)
+			(xy 57.15 55.88) (xy 57.15 66.04)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b60b224d-5064-4999-93f2-ef9e8c7deea1")
+		(uuid "b64680ff-b0d3-416b-8379-3f7536bac5ff")
 	)
 	(wire
 		(pts
@@ -1121,36 +898,6 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 116.84) (xy 88.9 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e6076ffe-3d48-427c-823c-08132daa6cf9")
-	)
-	(wire
-		(pts
-			(xy 104.14 33.02) (xy 104.14 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f67ae09a-87da-4212-b55e-fc47a16cbe5a")
-	)
-	(wire
-		(pts
-			(xy 54.61 55.88) (xy 54.61 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f8abbc2b-5884-460f-ae50-ecbdd79d944f")
-	)
-	(wire
-		(pts
 			(xy 36.83 22.86) (xy 62.23 22.86)
 		)
 		(stroke
@@ -1161,15 +908,15 @@
 	)
 	(symbol
 		(lib_id "Simulation_SPICE:VPULSE")
-		(at 88.9 87.63 0)
+		(at 38.1 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "00e1ceb5-b51e-42c8-89f1-801026f94f0f")
-		(property "Reference" "V3"
-			(at 92.71 84.9601 0)
+		(property "Reference" "V4"
+			(at 41.91 139.5701 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1178,7 +925,7 @@
 			)
 		)
 		(property "Value" "VPULSE"
-			(at 92.71 87.5001 0)
+			(at 41.91 142.1101 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1187,7 +934,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1196,7 +943,7 @@
 			)
 		)
 		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1205,7 +952,7 @@
 			)
 		)
 		(property "Description" "Voltage source, pulse"
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1214,7 +961,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=+ 2=-"
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1223,7 +970,7 @@
 			)
 		)
 		(property "Sim.Type" "PULSE"
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1232,7 +979,7 @@
 			)
 		)
 		(property "Sim.Device" "V"
-			(at 88.9 87.63 0)
+			(at 38.1 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1241,8 +988,8 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=0us tr=0us tf=0us tw=250us per=500us"
-			(at 87.884 128.524 0)
+		(property "Sim.Params" "y1=0 y2=3.3 td=750us tr=1us tf=1us tw=240us per=1000us"
+			(at 34.798 159.004 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1259,72 +1006,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "V3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 29.21 63.5 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0513a322-b88b-4b2f-a212-644f96f99118")
-		(property "Reference" "#PWR02"
-			(at 29.21 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "V_ENABLE1"
-			(at 28.956 68.072 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 29.21 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 29.21 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 29.21 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2ef194a7-3eb8-4497-a282-ec5db52e1bc8")
-		)
-		(instances
-			(project "motor"
-				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR02")
+					(reference "V4")
 					(unit 1)
 				)
 			)
@@ -1332,15 +1014,15 @@
 	)
 	(symbol
 		(lib_id "Simulation_SPICE:VPULSE")
-		(at 88.9 27.94 0)
+		(at 54.61 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "0b22cf67-ea66-4aff-b6c5-2fea64892647")
-		(property "Reference" "V2"
-			(at 92.71 25.2701 0)
+		(property "Reference" "V3"
+			(at 58.42 106.5501 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1349,7 +1031,7 @@
 			)
 		)
 		(property "Value" "VPULSE"
-			(at 92.71 27.8101 0)
+			(at 58.42 109.0901 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1358,7 +1040,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1367,7 +1049,7 @@
 			)
 		)
 		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1376,7 +1058,7 @@
 			)
 		)
 		(property "Description" "Voltage source, pulse"
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1385,7 +1067,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=+ 2=-"
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1394,7 +1076,7 @@
 			)
 		)
 		(property "Sim.Type" "PULSE"
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1403,7 +1085,7 @@
 			)
 		)
 		(property "Sim.Device" "V"
-			(at 88.9 27.94 0)
+			(at 54.61 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1412,8 +1094,8 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=500us tr=0 tf=0 tw=500us per=1000us"
-			(at 87.884 68.834 0)
+		(property "Sim.Params" "y1=0 y2=3.3 td=500us tr=1us tf=1us tw=240us per=1000us"
+			(at 34.798 126.238 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1430,7 +1112,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "V2")
+					(reference "V3")
 					(unit 1)
 				)
 			)
@@ -1438,7 +1120,7 @@
 	)
 	(symbol
 		(lib_id "Simulation_SPICE:VPULSE")
-		(at 104.14 87.63 0)
+		(at 53.34 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1446,7 +1128,7 @@
 		(dnp no)
 		(uuid "18399844-0290-4fd3-8de7-af4aecd87008")
 		(property "Reference" "V5"
-			(at 107.95 84.9601 0)
+			(at 57.15 139.5701 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1455,7 +1137,7 @@
 			)
 		)
 		(property "Value" "VPULSE"
-			(at 107.95 87.5001 0)
+			(at 57.15 142.1101 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1464,7 +1146,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1473,7 +1155,7 @@
 			)
 		)
 		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1482,7 +1164,7 @@
 			)
 		)
 		(property "Description" "Voltage source, pulse"
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1491,7 +1173,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=+ 2=-"
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1500,7 +1182,7 @@
 			)
 		)
 		(property "Sim.Type" "PULSE"
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1509,7 +1191,7 @@
 			)
 		)
 		(property "Sim.Device" "V"
-			(at 104.14 87.63 0)
+			(at 53.34 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1518,8 +1200,8 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=0us tf=0us tw=250us per=500us"
-			(at 87.63 125.73 0)
+		(property "Sim.Params" "y1=0 y2=3.3 td=250us tr=1us tf=1us tw=240us per=1000us"
+			(at 34.798 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1544,7 +1226,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 73.66 22.86 0)
+		(at 93.98 21.59 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1552,8 +1234,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "40c0db56-3b91-4bc3-8249-66e25ee81d7e")
-		(property "Reference" "#PWR06"
-			(at 73.66 26.67 0)
+		(property "Reference" "#PWR08"
+			(at 93.98 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1562,7 +1244,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 73.66 17.78 0)
+			(at 93.98 16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1570,7 +1252,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 22.86 0)
+			(at 93.98 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1579,7 +1261,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 22.86 0)
+			(at 93.98 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1588,7 +1270,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 73.66 22.86 0)
+			(at 93.98 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1602,7 +1284,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR06")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -1610,7 +1292,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 73.66 57.15 0)
+		(at 93.98 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1618,8 +1300,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "41151d5f-21f7-49d8-be27-eed565ff2d2a")
-		(property "Reference" "#PWR07"
-			(at 73.66 63.5 0)
+		(property "Reference" "#PWR09"
+			(at 93.98 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1628,7 +1310,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 73.66 62.23 0)
+			(at 93.98 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1636,7 +1318,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 57.15 0)
+			(at 93.98 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1645,7 +1327,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 57.15 0)
+			(at 93.98 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1654,7 +1336,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 73.66 57.15 0)
+			(at 93.98 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1668,7 +1350,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR07")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -1676,7 +1358,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 88.9 57.15 0)
+		(at 54.61 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1684,8 +1366,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "41512e80-7619-46eb-9635-975d91cd371b")
-		(property "Reference" "#PWR09"
-			(at 88.9 63.5 0)
+		(property "Reference" "#PWR013"
+			(at 54.61 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1694,7 +1376,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 88.9 62.23 0)
+			(at 54.61 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1702,7 +1384,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 57.15 0)
+			(at 54.61 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1711,7 +1393,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 57.15 0)
+			(at 54.61 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1720,7 +1402,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 88.9 57.15 0)
+			(at 54.61 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1734,32 +1416,164 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR09")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:VPULSE")
-		(at 104.14 27.94 0)
+		(lib_id "power:VCC")
+		(at 36.83 55.88 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "64083784-2dc8-4998-b628-cc191be3b32f")
-		(property "Reference" "V4"
-			(at 107.95 25.2701 0)
+		(fields_autoplaced yes)
+		(uuid "4d1d10fa-0e58-4227-936c-2563cd98b0e4")
+		(property "Reference" "#PWR04"
+			(at 36.83 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Value" "VPULSE"
-			(at 107.95 27.8101 0)
+		(property "Value" "V1_GATE2"
+			(at 36.83 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 36.83 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 36.83 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 36.83 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "46b79315-72d5-4b25-9a84-04c7e98f6c4c")
+		)
+		(instances
+			(project "motor"
+				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
+					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 50.8 55.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4d5404df-4709-4791-9347-513fa3e2b0a1")
+		(property "Reference" "#PWR05"
+			(at 50.8 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "V2_GATE1"
+			(at 50.8 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 50.8 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 50.8 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cb11ab91-d8e4-49e9-992d-3730d1d949f6")
+		)
+		(instances
+			(project "motor"
+				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 57.15 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "54cdd3f3-5dc3-4a00-b762-baed48d6af75")
+		(property "Reference" "#PWR06"
+			(at 57.15 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 55.118 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1768,7 +1582,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.14 27.94 0)
+			(at 57.15 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1776,8 +1590,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 104.14 27.94 0)
+		(property "Datasheet" ""
+			(at 57.15 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1785,62 +1599,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Voltage source, pulse"
-			(at 104.14 27.94 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 57.15 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(property "Sim.Pins" "1=+ 2=-"
-			(at 104.14 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" "PULSE"
-			(at 104.14 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "V"
-			(at 104.14 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "y1=0 y2=3.3 td=0 tr=0 tf=0 tw=500us per=1000us"
-			(at 87.63 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "2"
-			(uuid "844f612b-5f7a-4be6-9080-c47e25c0d40b")
 		)
 		(pin "1"
-			(uuid "44b64005-1366-43af-ac67-d81398d094da")
+			(uuid "9e2452b9-e4b4-49bc-a495-2a342c1ec210")
 		)
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "V4")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -1854,7 +1628,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "763aad50-a7d1-43e5-a0ea-25c464056afe")
+		(fields_autoplaced yes)
+		(uuid "5f0bd459-4df3-475f-9009-441846cf70aa")
 		(property "Reference" "#PWR01"
 			(at 25.4 52.07 0)
 			(effects
@@ -1864,8 +1639,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DIR1"
-			(at 25.146 60.452 0)
+		(property "Value" "V1_GATE1"
+			(at 25.4 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1900,12 +1675,183 @@
 			)
 		)
 		(pin "1"
-			(uuid "376f002f-c7e1-4078-b6de-def70e8d0b9b")
+			(uuid "9f91f097-e306-4ce6-b6b4-08d46c8fc55f")
 		)
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
 					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Simulation_SPICE:VPULSE")
+		(at 38.1 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "64083784-2dc8-4998-b628-cc191be3b32f")
+		(property "Reference" "V2"
+			(at 41.91 106.5501 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "VPULSE"
+			(at 41.91 109.0901 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Voltage source, pulse"
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=+ 2=-"
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Type" "PULSE"
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "V"
+			(at 38.1 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Sim.Params" "y1=0 y2=3.3 td=0us tr=1us tf=1us tw=240us per=1000us"
+			(at 34.798 123.698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "2"
+			(uuid "844f612b-5f7a-4be6-9080-c47e25c0d40b")
+		)
+		(pin "1"
+			(uuid "44b64005-1366-43af-ac67-d81398d094da")
+		)
+		(instances
+			(project "motor"
+				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
+					(reference "V2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 62.23 55.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6e9329c6-f2e7-44c8-a60b-61547b533dad")
+		(property "Reference" "#PWR07"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "V2_GATE2"
+			(at 62.23 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 62.23 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 62.23 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5c25131e-3e8d-4c1e-9153-9b895852b010")
+		)
+		(instances
+			(project "motor"
+				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -1980,7 +1926,7 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 88.9 22.86 0)
+		(at 54.61 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1988,8 +1934,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "82222b4a-7fe6-4a84-b316-305eba55f720")
-		(property "Reference" "#PWR08"
-			(at 88.9 26.67 0)
+		(property "Reference" "#PWR012"
+			(at 54.61 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1997,8 +1943,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DIR1"
-			(at 88.9 17.78 0)
+		(property "Value" "V1_GATE2"
+			(at 54.61 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2006,7 +1952,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 22.86 0)
+			(at 54.61 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2015,7 +1961,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 22.86 0)
+			(at 54.61 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2024,7 +1970,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 88.9 22.86 0)
+			(at 54.61 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2038,73 +1984,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 104.14 82.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "93da1da7-255d-4c97-ac01-4fac41292ffa")
-		(property "Reference" "#PWR014"
-			(at 104.14 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "V_ENABLE2"
-			(at 104.14 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 104.14 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 104.14 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 104.14 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "def27da7-377f-4228-ad4c-65d9e1e42f0b")
-		)
-		(instances
-			(project "motor"
-				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR014")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -2112,7 +1992,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 104.14 116.84 0)
+		(at 53.34 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2120,8 +2000,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9422a790-7c76-417b-8b4b-a81ff89a822c")
-		(property "Reference" "#PWR015"
-			(at 104.14 123.19 0)
+		(property "Reference" "#PWR017"
+			(at 53.34 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2130,7 +2010,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 104.14 121.92 0)
+			(at 53.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2138,7 +2018,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.14 116.84 0)
+			(at 53.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2147,7 +2027,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.14 116.84 0)
+			(at 53.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2156,7 +2036,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 104.14 116.84 0)
+			(at 53.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2170,7 +2050,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR015")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -2178,7 +2058,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 104.14 57.15 0)
+		(at 38.1 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2186,8 +2066,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9f8e76c8-c7de-4cce-9a27-da243626742d")
-		(property "Reference" "#PWR013"
-			(at 104.14 63.5 0)
+		(property "Reference" "#PWR011"
+			(at 38.1 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2196,7 +2076,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 104.14 62.23 0)
+			(at 38.1 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2204,7 +2084,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.14 57.15 0)
+			(at 38.1 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2213,7 +2093,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.14 57.15 0)
+			(at 38.1 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2222,7 +2102,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 104.14 57.15 0)
+			(at 38.1 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2236,7 +2116,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR013")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -2244,7 +2124,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 88.9 116.84 0)
+		(at 38.1 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2252,8 +2132,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a054163f-d06b-4d3e-93bf-db4f3c6d33fd")
-		(property "Reference" "#PWR011"
-			(at 88.9 123.19 0)
+		(property "Reference" "#PWR015"
+			(at 38.1 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2262,7 +2142,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 88.9 121.92 0)
+			(at 38.1 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2270,7 +2150,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 116.84 0)
+			(at 38.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2279,7 +2159,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 116.84 0)
+			(at 38.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2288,7 +2168,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 88.9 116.84 0)
+			(at 38.1 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2302,7 +2182,73 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR011")
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 31.75 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a1db0d66-1e7c-4246-a9dc-314d17f68e56")
+		(property "Reference" "#PWR02"
+			(at 31.75 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 29.718 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 31.75 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 31.75 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 31.75 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3463137d-b06d-4163-aeed-d8b8b220543f")
+		)
+		(instances
+			(project "motor"
+				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -2383,7 +2329,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "b37c24ee-661d-4be4-93df-d05a45954f56")
 		(property "Reference" "L2"
 			(at 55.88 27.9399 0)
@@ -2394,7 +2339,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "15mH"
 			(at 55.88 30.4799 0)
 			(effects
 				(font
@@ -2447,15 +2392,16 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 54.61 63.5 180)
+		(at 53.34 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c4d8d142-ce78-4a02-bc28-bb0f36dfe03d")
-		(property "Reference" "#PWR05"
-			(at 54.61 59.69 0)
+		(fields_autoplaced yes)
+		(uuid "bc3cdeff-fbc1-48e1-b339-3c4904cad16b")
+		(property "Reference" "#PWR016"
+			(at 53.34 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2463,8 +2409,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_ENABLE2"
-			(at 54.356 68.072 0)
+		(property "Value" "V2_GATE2"
+			(at 53.34 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2472,7 +2418,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 54.61 63.5 0)
+			(at 53.34 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2481,7 +2427,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 54.61 63.5 0)
+			(at 53.34 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2490,7 +2436,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 54.61 63.5 0)
+			(at 53.34 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2499,12 +2445,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "9b918df0-1805-41e4-b35c-a6f88eee850e")
+			(uuid "5f3990ab-d667-4d1f-afa8-aa71a9816a35")
 		)
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR05")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -2578,7 +2524,7 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 104.14 22.86 0)
+		(at 38.1 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2586,8 +2532,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d20640d7-3086-458b-b0df-4caa785cb43e")
-		(property "Reference" "#PWR012"
-			(at 104.14 26.67 0)
+		(property "Reference" "#PWR010"
+			(at 38.1 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2595,8 +2541,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_DIR2"
-			(at 104.14 17.78 0)
+		(property "Value" "V1_GATE1"
+			(at 38.1 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2604,7 +2550,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 104.14 22.86 0)
+			(at 38.1 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2613,7 +2559,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 104.14 22.86 0)
+			(at 38.1 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2622,7 +2568,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 104.14 22.86 0)
+			(at 38.1 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2636,7 +2582,7 @@
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR012")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -2661,7 +2607,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "15mH"
 			(at 30.48 30.4799 0)
 			(effects
 				(font
@@ -2714,16 +2660,16 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 88.9 82.55 0)
+		(at 38.1 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "dafb6a2a-309f-431f-85a5-7f69884fc081")
-		(property "Reference" "#PWR010"
-			(at 88.9 86.36 0)
+		(uuid "f3cfbd63-8ce8-40c9-b202-1b57bece9bb7")
+		(property "Reference" "#PWR014"
+			(at 38.1 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2731,8 +2677,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "V_ENABLE1"
-			(at 88.9 77.47 0)
+		(property "Value" "V2_GATE1"
+			(at 38.1 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2740,7 +2686,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 82.55 0)
+			(at 38.1 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2749,7 +2695,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 82.55 0)
+			(at 38.1 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2758,7 +2704,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 88.9 82.55 0)
+			(at 38.1 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2767,28 +2713,28 @@
 			)
 		)
 		(pin "1"
-			(uuid "02c76ca6-1933-4a8a-ba7a-3ef81b7fc61f")
+			(uuid "66c7f80e-a57f-4ef9-96c3-a00fb41f79e1")
 		)
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR010")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:VDC")
-		(at 73.66 27.94 0)
+		(lib_id "Simulation_SPICE:VPULSE")
+		(at 93.98 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f48fdddd-65a0-4e8d-b827-80610f2c134f")
+		(uuid "fc35bf7b-e5f0-41ba-b678-4a27933842d8")
 		(property "Reference" "V1"
-			(at 77.47 25.4 0)
+			(at 97.79 24.0001 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2796,8 +2742,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "12V"
-			(at 77.47 27.686 0)
+		(property "Value" "VPULSE"
+			(at 97.79 26.5401 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2806,7 +2752,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 27.94 0)
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2815,7 +2761,7 @@
 			)
 		)
 		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec_Independent_Sources_for"
-			(at 73.66 27.94 0)
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2823,8 +2769,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Voltage source, DC"
-			(at 73.66 27.94 0)
+		(property "Description" "Voltage source, pulse"
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2833,7 +2779,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=+ 2=-"
-			(at 73.66 27.94 0)
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2841,8 +2787,8 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Type" "DC"
-			(at 73.66 27.94 0)
+		(property "Sim.Type" "PULSE"
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2851,7 +2797,7 @@
 			)
 		)
 		(property "Sim.Device" "V"
-			(at 73.66 27.94 0)
+			(at 93.98 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2860,11 +2806,20 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Params" "y1=0 y2=40 td=0us tr=1us tf=1us tw=113us per=120us"
+			(at 90.678 41.148 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(pin "2"
-			(uuid "34eb38d0-03a6-4167-9574-482a9d1886f3")
+			(uuid "359645b3-1aad-4b72-93d9-528397fb5f74")
 		)
 		(pin "1"
-			(uuid "fe9eb84d-f398-46f9-9b0c-ee8dff1f760b")
+			(uuid "2d187080-8804-4c01-9f07-69027dbade7c")
 		)
 		(instances
 			(project "motor"
@@ -2875,67 +2830,44 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:VCC")
-		(at 50.8 55.88 180)
-		(unit 1)
+	(sheet
+		(at 147.955 53.34)
+		(size 26.035 15.875)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ff24fb64-2d96-424a-9888-873676ecebee")
-		(property "Reference" "#PWR04"
-			(at 50.8 52.07 0)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "1588fcaa-a2fe-4d3b-84e5-be051eeaf969")
+		(property "Sheetname" "galvo_driver"
+			(at 147.955 52.6284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
+				(justify left bottom)
 			)
 		)
-		(property "Value" "V_DIR2"
-			(at 50.546 60.452 0)
+		(property "Sheetfile" "galvo.kicad_sch"
+			(at 147.955 69.7996 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left top)
 			)
-		)
-		(property "Footprint" ""
-			(at 50.8 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 50.8 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "be47bc34-1e3c-47c6-9d7f-0cbb8eb09219")
 		)
 		(instances
 			(project "motor"
 				(path "/833cc0fc-e321-4f55-9543-54c4634b471c"
-					(reference "#PWR04")
-					(unit 1)
+					(page "4")
 				)
 			)
 		)
@@ -2983,7 +2915,7 @@
 				(justify right)
 			)
 		)
-		(pin "DIR" input
+		(pin "G1" input
 			(at 50.8 55.88 270)
 			(uuid "a5b76b31-0c72-41da-81ee-07f61dcc3670")
 			(effects
@@ -3013,9 +2945,19 @@
 				(justify right)
 			)
 		)
-		(pin "ENABLE" input
-			(at 54.61 55.88 270)
+		(pin "G2" input
+			(at 62.23 55.88 270)
 			(uuid "51a2de6d-61bb-4287-b8a5-d87e38c04155")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GND" input
+			(at 57.15 55.88 270)
+			(uuid "efde9b17-4e12-45b8-ad03-4ff57b2b075a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3074,7 +3016,7 @@
 				(justify right)
 			)
 		)
-		(pin "DIR" input
+		(pin "G1" input
 			(at 25.4 55.88 270)
 			(uuid "e1456b42-8b9a-4b14-8a45-f44c6c142922")
 			(effects
@@ -3104,9 +3046,19 @@
 				(justify right)
 			)
 		)
-		(pin "ENABLE" input
-			(at 29.21 55.88 270)
+		(pin "G2" input
+			(at 36.83 55.88 270)
 			(uuid "1d5fe78f-cc4d-4efe-a646-9ae51d78eb7f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GND" input
+			(at 31.75 55.88 270)
+			(uuid "d490b8f6-a5ac-4ff1-9b87-104dc774dd17")
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -661,6 +661,10 @@
     [
       "1dca6dba-f584-4c05-8cae-1ca72885a72e",
       "H-Bridge 2"
+    ],
+    [
+      "1588fcaa-a2fe-4d3b-84e5-be051eeaf969",
+      "galvo_driver"
     ]
   ],
   "text_variables": {}
