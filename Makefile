@@ -1,5 +1,5 @@
 CFLAGS += -Wall -Wextra -std=c99 -Iinclude
-BINARIES = motor_test projection_test display_test motor2_test
+BINARIES = motor_test projection_test display_test motor2_test galvo_test spi_test
 SOURCES = src/motor.c src/grid.c src/picture.c src/config.c src/gpio.c src/display.c
 OBJ_DIR = target/obj
 
@@ -60,7 +60,7 @@ $(OBJ_DIR)/%_device.o: %.c | $(OBJ_DIR)/src
 -include $(wildcard target/obj/src/*.d)
 
 transfer: device
-	rsync -chavP --stats $(DEV_BIN_DIR)/* thomas@pi:/home/thomas/laser-build
+	rsync -chavP --stats $(DEV_BIN_DIR)/* thomas@pizero:/home/thomas/laser-build
 
 clean:
 	rm -rf target
