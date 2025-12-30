@@ -39,7 +39,6 @@ int main(int argc, const char* argv[])
     for(int i = 0; i < 0xFFFFFF; i++) {
 
         uint8_t buf[2] = {0};
-
         if (spiRead(spi_handle, (char*)buf, 2) != 2)
             assert(0);
 
@@ -47,15 +46,14 @@ int main(int argc, const char* argv[])
         //                 BYTE_TO_BINARY(buf[0]),
         //                 BYTE_TO_BINARY(buf[1]));
 
-        uint16_t raw = ((buf[0] << 8) | buf[1]) & 0b1111111111111;
-        int16_t val = (raw & 0x1000) ? (raw | 0xE000) : (int16_t)raw;
+        uint16_t raw = ((buf[0] << 8) | buf[1]) & 0x1FFF;
+        int16_t val = (int16_t)(raw << 3) >> 3;
 
         // fprintf(stderr, BYTE_TO_BINARY_PATTERN " " BYTE_TO_BINARY_PATTERN "\n",
         //                 BYTE_TO_BINARY(((char*)&val)[1]),
         //                 BYTE_TO_BINARY(((char*)&val)[0]));
 
-
-        fprintf(stderr, "%d\n", val);
+        fprintf(stderr, "\r%d                  ", val);
         gpioDelay(1000);
 
     }

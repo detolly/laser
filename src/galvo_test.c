@@ -26,12 +26,16 @@ int main(int argc, const char* argv[])
     gpioSetMode(PULSE_GPIO2, PI_OUTPUT);
 
     const size_t on_time = 10;
-    const float duty = 0.30f;
+    const float duty = 0.1f;
     const size_t off_time = (size_t)((float)on_time / duty) - on_time;
 
-#define NUM_PULSES 20
+    #define US_ON 10000
 
-    for(int i = 0; i < NUM_PULSES; i++) {
+    const size_t start = gpioTick();
+
+    for(;;) {
+        if (gpioTick() - start > US_ON)
+            break;
         gpioWrite(PULSE_GPIO2, 1);
         DELAY(on_time);
         gpioWrite(PULSE_GPIO2, 0);
