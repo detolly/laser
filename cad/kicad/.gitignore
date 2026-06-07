@@ -1,3 +1,6 @@
 motor-backups
 fp-info-cache
 *.lck
+
+*.kicad_pcb
+*.kicad_prl
